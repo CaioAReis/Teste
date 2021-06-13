@@ -1,22 +1,39 @@
 
-# Nome
-
-## < Nome do sistema >
+# VesteME - Loja Virtual e-commerce
 
 ### RESUMO/JUSTIFICATIVA
 
-Todo ano é preciso descrever as características de um sistema que será construído pelos alunos. O presente repositório busca organizar as ideias e definir um padrão/template de documentação de sistemas que seja simples e colaborativo.
+Você já pensou em como o comércio eletronico mudou as formas tradicionais de compra e venda atualmente? Um desenvolvimento que impressiona até os varejistas mais modernos do mercado e está levando os consumidores a cada vez mais passar do varejo tradicional para o comércio virtual.
+
+O crescimento contínuo da internet Internet pôde moldar esses novos hábitos de compra online. Como todos sabemos, o e-commerce está crescendo muito mais rápido do que o varejo tradicional, visto que o cliente é apresentado a uma ampla gama de produtos com apenas alguns cliques, se sentindo motivado a fazer uma compra com base em seus interesses, predominando a simples navegação na ferramenta. 
+
+Portanto, o presente documento visa criar uma loja online(VesteME) muito agradável, simples e confiável com todas as vantagens que um e-commerce pode oferecer,  considerando principalmente a nova situação provocada pela pandemia do coronavírus.
 
 ### OBJETIVOS
 
-- Definir um template de avaliação para ser utilizado na disciplina de web 2
+- Desenvolver uma loja online que forneça serviços de pesquisa e compra de produtos, consulta e/ou edição dos dados pessoais, consulta de frete, login no sistema, consulta de pedidos, rastreamento de transportes e a efetuação de pagamentos na compra.
 
 ## FUNCIONALIDADES
 
-- [ ] Apresentar os requisitos funcionais
+- [x] Apresentar os requisitos funcionais
 - [x] Apresentar os requisitos não-funcionais
-- [ ] Indicar os membros da equipe
+- [x] Indicar os membros da equipe
 - [x] Exibir repositório e dicas que são comuns
+
+### REQUISITOS FUNCIONAIS
+
+- [ ] O sistema deve permitir o cadastro de um cliente.
+- [ ] O sistema deve autenticar usuários.
+- [ ] O sistema deve manter informações sobre os produtos.
+- [ ] O sistema deve permitir que o cliente realize um pedido.
+- [ ] O sistema deve permitir a alteração dos dados de um cliente.
+- [ ] O sistema deve disponibilizar a efetuação de pagamento.
+- [ ] O sistema deve disponibilizar o rastreamento do pedido enviado para os correios.
+- [ ] O sistema deve permitir o cadastro de promoções.
+- [ ] O sistema deve permitir ao cliente a consulta do frete.
+- [ ] O sistema deve permitir a busca de pedidos
+- [ ] Busca de produtos.
+- [ ] Cancelamento de compra.
 
 ### REQUISITOS NÃO FUNCIONAIS
 
@@ -30,9 +47,9 @@ Todo ano é preciso descrever as características de um sistema que será constr
 
 ## Membros da equipe (Até 3 pessoas. Identificar o líder)
 
-- Aluno 1 (líder)
-- Aluno 2
-- Aluno 3
+- Maciel Conceição (líder)
+- Caio Almeida
+- Vinícius Oliveira
 
 ## Dicas, repositórios e materiais úteis
 
