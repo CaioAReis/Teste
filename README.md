@@ -1,5 +1,5 @@
 
-# VesteME - Loja Virtual e-commerce
+# VesteMe - Loja Virtual e-commerce
 
 ### RESUMO/JUSTIFICATIVA
 
