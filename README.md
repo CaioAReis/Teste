@@ -45,6 +45,11 @@ Portanto, o presente documento visa criar uma loja online(VesteME) muito agradá
 - Fazer um programa, em C# com Entity Framework, para realizar carga inicial dos dados
 - Utilizar campos de data, numéricos e textuais
 
+
+## DER DO SISTEMA
+
+![DER](assets/DER.png)
+
 ## Membros da equipe (Até 3 pessoas. Identificar o líder)
 
 - Maciel Conceição (líder)
