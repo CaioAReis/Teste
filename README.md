@@ -1,6 +1,8 @@
 
 # VesteMe - Loja Virtual e-commerce
 
+![VesteMe](assets/vesteme.png)
+
 ### RESUMO/JUSTIFICATIVA
 
 Você já pensou em como o comércio eletronico mudou as formas tradicionais de compra e venda atualmente? Um desenvolvimento que impressiona até os varejistas mais modernos do mercado e está levando os consumidores a cada vez mais passar do varejo tradicional para o comércio virtual.
