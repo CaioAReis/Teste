@@ -214,6 +214,22 @@ namespace VesteMeAPI.Migrations
                     b.ToTable("Tamanhos");
                 });
 
+            modelBuilder.Entity("VesteMeAPI.Models.TipoUsuario", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TipoUsuarios");
+                });
+
             modelBuilder.Entity("VesteMeAPI.Models.Usuario", b =>
                 {
                     b.Property<int>("ID")
@@ -254,12 +270,14 @@ namespace VesteMeAPI.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<int>("TipoUsuario")
+                    b.Property<int>("TipoUsuarioID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("EnderecoID");
+
+                    b.HasIndex("TipoUsuarioID");
 
                     b.ToTable("Usuarios");
                 });
@@ -332,7 +350,20 @@ namespace VesteMeAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VesteMeAPI.Models.TipoUsuario", "TipoUsuario")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("TipoUsuarioID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Endereco");
+
+                    b.Navigation("TipoUsuario");
+                });
+
+            modelBuilder.Entity("VesteMeAPI.Models.TipoUsuario", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

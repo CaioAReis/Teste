@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VesteMeAPI.Migrations
 {
-    public partial class TesteINICIAL : Migration
+    public partial class INICIAL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,6 +83,21 @@ namespace VesteMeAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "TipoUsuarios",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Tipo = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoUsuarios", x => x.ID);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
@@ -130,7 +145,7 @@ namespace VesteMeAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Telefone = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TipoUsuario = table.Column<int>(type: "int", nullable: false),
+                    TipoUsuarioID = table.Column<int>(type: "int", nullable: false),
                     EnderecoID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -140,6 +155,12 @@ namespace VesteMeAPI.Migrations
                         name: "FK_Usuarios_Enderecos_EnderecoID",
                         column: x => x.EnderecoID,
                         principalTable: "Enderecos",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Usuarios_TipoUsuarios_TipoUsuarioID",
+                        column: x => x.TipoUsuarioID,
+                        principalTable: "TipoUsuarios",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -256,6 +277,11 @@ namespace VesteMeAPI.Migrations
                 name: "IX_Usuarios_EnderecoID",
                 table: "Usuarios",
                 column: "EnderecoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_TipoUsuarioID",
+                table: "Usuarios",
+                column: "TipoUsuarioID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -286,6 +312,9 @@ namespace VesteMeAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Enderecos");
+
+            migrationBuilder.DropTable(
+                name: "TipoUsuarios");
         }
     }
 }

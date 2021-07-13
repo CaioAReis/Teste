@@ -40,7 +40,8 @@ namespace VesteMeAPI.Models
         [DataType(DataType.PhoneNumber)]
         public string Telefone { get; set; }
 
-        public int TipoUsuario { get; set; }
+        public int TipoUsuarioID { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
 
         public int EnderecoID { get; set; }
         public Endereco Endereco { get; set; }

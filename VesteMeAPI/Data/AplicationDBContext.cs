@@ -17,6 +17,7 @@ namespace VesteMeAPI.Data
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Tamanho> Tamanhos { get; set; }
+        public DbSet<TipoUsuario> TipoUsuarios { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }

@@ -24,8 +24,10 @@ namespace VesteMeAPI.Models
 
         public decimal ValorTotal { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DataEntrega { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DataPedido { get; set; }
 
         public virtual ICollection<Produto> Produtos { get; set; }
