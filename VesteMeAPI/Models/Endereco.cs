@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace VesteMeAPI.Models
 {
@@ -23,14 +19,14 @@ namespace VesteMeAPI.Models
         [Required(ErrorMessage = "Nome da Cidade é obrigatório.", AllowEmptyStrings = false)]
         public string Cidade { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         [Required(ErrorMessage = "Nome do Bairro é obrigatório.", AllowEmptyStrings = false)]
         public string Bairro { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         public string Complemento { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         [Required(ErrorMessage = "Nome da Rua é obrigatório.", AllowEmptyStrings = false)]
         public string Rua { get; set; }
 

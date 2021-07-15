@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace VesteMeAPI.Models
 {
@@ -12,7 +8,7 @@ namespace VesteMeAPI.Models
         public int ID { get; set; }
 
         [MaxLength(255)]
-        [Required(ErrorMessage = "A forma de pagamento é obrigatório.", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "A forma de pagamento é obrigatória.", AllowEmptyStrings = false)]
         public string FormaPagamento { get; set; }
     }
 }

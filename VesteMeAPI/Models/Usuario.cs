@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VesteMeAPI.Models
 {
@@ -11,7 +8,7 @@ namespace VesteMeAPI.Models
         [Key]
         public int ID { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         [Required(ErrorMessage = "Nome do usuário é obrigatório.", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
@@ -19,17 +16,18 @@ namespace VesteMeAPI.Models
         [Required(ErrorMessage = "CPF é obrigatório", AllowEmptyStrings = false)]
         public string CPF { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Email é obrigatório.", AllowEmptyStrings = false)]
         public string Email { get; set; }
 
-        [MaxLength(500)]
+        [MaxLength(255)]
         [Required(ErrorMessage = "Senha é obrigatória.", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
+        [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
         [MaxLength(15)]

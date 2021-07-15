@@ -9,7 +9,7 @@ using VesteMeAPI.Data;
 namespace VesteMeAPI.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20210713211217_INICIAL")]
+    [Migration("20210715163631_INICIAL")]
     partial class INICIAL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,8 +73,8 @@ namespace VesteMeAPI.Migrations
 
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CEP")
                         .IsRequired()
@@ -87,8 +87,8 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Complemento")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Estado")
                         .IsRequired()
@@ -100,8 +100,8 @@ namespace VesteMeAPI.Migrations
 
                     b.Property<string>("Rua")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
@@ -134,6 +134,7 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPedido")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("PagamentoID")
@@ -169,9 +170,11 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataAlteracao")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataCadastro")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
@@ -208,8 +211,8 @@ namespace VesteMeAPI.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("ID");
 
@@ -252,21 +255,21 @@ namespace VesteMeAPI.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("EnderecoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Telefone")
                         .HasMaxLength(15)

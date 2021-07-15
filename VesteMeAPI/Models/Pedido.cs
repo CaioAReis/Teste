@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VesteMeAPI.Models
 {
@@ -27,8 +25,10 @@ namespace VesteMeAPI.Models
         [DataType(DataType.Date)]
         public DateTime DataEntrega { get; set; }
 
+
         [DataType(DataType.Date)]
-        public DateTime DataPedido { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime DataPedido { get; set; } = DateTime.UtcNow;
 
         public virtual ICollection<Produto> Produtos { get; set; }
     }
