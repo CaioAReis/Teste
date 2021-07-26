@@ -10,6 +10,7 @@ namespace VesteMeAPI.Models
 
         [MaxLength(255)]
         [Required(ErrorMessage = "Nome do usuário é obrigatório.", AllowEmptyStrings = false)]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Números e caracteres especiais não são permitidos.")]
         public string Nome { get; set; }
 
         [MaxLength(50)]

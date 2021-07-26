@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace VesteMeAPI.Models
 {
@@ -20,6 +21,7 @@ namespace VesteMeAPI.Models
         [Required(ErrorMessage = "O status do pedido é obrigatório", AllowEmptyStrings = false)]
         public string Status { get; set; }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal ValorTotal { get; set; }
 
         [DataType(DataType.Date)]
@@ -27,8 +29,8 @@ namespace VesteMeAPI.Models
 
 
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime DataPedido { get; set; } = DateTime.UtcNow;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime DataPedido { get; set; } = DateTime.Now;
 
         public virtual ICollection<Produto> Produtos { get; set; }
     }

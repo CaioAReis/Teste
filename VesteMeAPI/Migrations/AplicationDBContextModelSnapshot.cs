@@ -132,7 +132,6 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DataPedido")
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("PagamentoID")
@@ -147,7 +146,7 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("ID");
 
@@ -171,8 +170,7 @@ namespace VesteMeAPI.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
+                    b.Property<DateTime?>("DataCadastro")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
@@ -192,7 +190,7 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("ID");
 

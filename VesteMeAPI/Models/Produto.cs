@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace VesteMeAPI.Models
 {
@@ -12,20 +13,20 @@ namespace VesteMeAPI.Models
 
         [StringLength(255)]
         [Required(ErrorMessage = "Nome do produto é obrigatório.", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Números e caracteres especiais não são permitidos.")]
         public string Nome { get; set; }
 
         [StringLength(20000)]
         [Required(ErrorMessage = "Uma descrição é obrigatório.", AllowEmptyStrings = false)]
         public string Descricao { get; set; }
 
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Valor { get; set; }
 
         public int QuantidadeEstoque { get; set; }
 
         [DataType(DataType.DateTime)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DateTime? DataCadastro { get; set; } = DateTime.Now;
 
         [DataType(DataType.DateTime)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

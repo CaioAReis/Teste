@@ -52,6 +52,10 @@ Portanto, o presente documento visa criar uma loja online(VesteME) muito agradá
 
 ![DER](assets/DER.png)
 
+## Protótipo
+
+[![Protótipo](assets/Protótipo.png)](https://www.figma.com/file/Cot6xC1GD5pyiKHMVXY7WL/VesteMe-Prot%C3%B3tipo?node-id=0%3A1)
+
 ## Membros da equipe (Até 3 pessoas. Identificar o líder)
 
 - Maciel Conceição (líder)

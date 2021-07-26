@@ -107,10 +107,9 @@ namespace VesteMeAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Descricao = table.Column<string>(type: "longtext", maxLength: 20000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Valor = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     QuantidadeEstoque = table.Column<int>(type: "int", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     CategoriaID = table.Column<int>(type: "int", nullable: false),
@@ -203,10 +202,9 @@ namespace VesteMeAPI.Migrations
                     PagamentoID = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ValorTotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     DataEntrega = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)")
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
