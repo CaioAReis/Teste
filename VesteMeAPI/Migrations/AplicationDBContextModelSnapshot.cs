@@ -61,6 +61,48 @@ namespace VesteMeAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Nome = "Camisas"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Nome = "Camisetas"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Nome = "Calças"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Nome = "Bermudas e Shorts"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Nome = "Blusas"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Nome = "Saias"
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Nome = "Vestidos"
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Nome = "Casacos"
+                        });
                 });
 
             modelBuilder.Entity("VesteMeAPI.Models.Endereco", b =>
@@ -120,6 +162,18 @@ namespace VesteMeAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Pagamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            FormaPagamento = "Cartão de crédito"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            FormaPagamento = "Boleto"
+                        });
                 });
 
             modelBuilder.Entity("VesteMeAPI.Models.Pedido", b =>
@@ -213,6 +267,33 @@ namespace VesteMeAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Tamanhos");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Nome = "PP"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Nome = "P"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Nome = "M"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Nome = "G"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Nome = "GG"
+                        });
                 });
 
             modelBuilder.Entity("VesteMeAPI.Models.TipoUsuario", b =>
@@ -229,6 +310,18 @@ namespace VesteMeAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("TipoUsuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Tipo = "administrador"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Tipo = "cliente"
+                        });
                 });
 
             modelBuilder.Entity("VesteMeAPI.Models.Usuario", b =>
@@ -254,7 +347,7 @@ namespace VesteMeAPI.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("EnderecoID")
+                    b.Property<int?>("EnderecoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -271,7 +364,7 @@ namespace VesteMeAPI.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<int>("TipoUsuarioID")
+                    b.Property<int?>("TipoUsuarioID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -281,6 +374,18 @@ namespace VesteMeAPI.Migrations
                     b.HasIndex("TipoUsuarioID");
 
                     b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CPF = "000.000.000-00",
+                            DataNascimento = new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Email = "Admin@admin.com.br",
+                            Nome = "Administrador",
+                            Senha = "Admin@admin.com.br",
+                            TipoUsuarioID = 1
+                        });
                 });
 
             modelBuilder.Entity("PedidoProduto", b =>
@@ -347,15 +452,11 @@ namespace VesteMeAPI.Migrations
                 {
                     b.HasOne("VesteMeAPI.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnderecoID");
 
                     b.HasOne("VesteMeAPI.Models.TipoUsuario", "TipoUsuario")
                         .WithMany("Usuarios")
-                        .HasForeignKey("TipoUsuarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TipoUsuarioID");
 
                     b.Navigation("Endereco");
 

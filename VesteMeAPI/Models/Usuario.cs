@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace VesteMeAPI.Models
 {
@@ -18,7 +19,7 @@ namespace VesteMeAPI.Models
         public string CPF { get; set; }
 
         [MaxLength(255)]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         [Required(ErrorMessage = "Email é obrigatório.", AllowEmptyStrings = false)]
         public string Email { get; set; }
 
@@ -39,10 +40,11 @@ namespace VesteMeAPI.Models
         [DataType(DataType.PhoneNumber)]
         public string Telefone { get; set; }
 
-        public int TipoUsuarioID { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? TipoUsuarioID { get; set; } = 2;
         public TipoUsuario TipoUsuario { get; set; }
 
-        public int EnderecoID { get; set; }
+        public int? EnderecoID { get; set; }
         public Endereco Endereco { get; set; }
     }
 }

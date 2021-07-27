@@ -27,7 +27,6 @@ namespace VesteMeAPI.Models
         [DataType(DataType.Date)]
         public DateTime DataEntrega { get; set; }
 
-
         [DataType(DataType.Date)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime DataPedido { get; set; } = DateTime.Now;

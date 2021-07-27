@@ -146,8 +146,8 @@ namespace VesteMeAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Telefone = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TipoUsuarioID = table.Column<int>(type: "int", nullable: false),
-                    EnderecoID = table.Column<int>(type: "int", nullable: false)
+                    TipoUsuarioID = table.Column<int>(type: "int", nullable: true),
+                    EnderecoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,13 +157,13 @@ namespace VesteMeAPI.Migrations
                         column: x => x.EnderecoID,
                         principalTable: "Enderecos",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Usuarios_TipoUsuarios_TipoUsuarioID",
                         column: x => x.TipoUsuarioID,
                         principalTable: "TipoUsuarios",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -248,6 +248,56 @@ namespace VesteMeAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Categorias",
+                columns: new[] { "ID", "Nome" },
+                values: new object[,]
+                {
+                    { 1, "Camisas" },
+                    { 2, "Camisetas" },
+                    { 3, "Calças" },
+                    { 4, "Bermudas e Shorts" },
+                    { 5, "Blusas" },
+                    { 6, "Saias" },
+                    { 7, "Vestidos" },
+                    { 8, "Casacos" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Pagamentos",
+                columns: new[] { "ID", "FormaPagamento" },
+                values: new object[,]
+                {
+                    { 2, "Boleto" },
+                    { 1, "Cartão de crédito" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Tamanhos",
+                columns: new[] { "ID", "Nome" },
+                values: new object[,]
+                {
+                    { 1, "PP" },
+                    { 2, "P" },
+                    { 3, "M" },
+                    { 4, "G" },
+                    { 5, "GG" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TipoUsuarios",
+                columns: new[] { "ID", "Tipo" },
+                values: new object[,]
+                {
+                    { 1, "administrador" },
+                    { 2, "cliente" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Usuarios",
+                columns: new[] { "ID", "CPF", "Celular", "DataNascimento", "Email", "EnderecoID", "Nome", "Senha", "Telefone", "TipoUsuarioID" },
+                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PedidoProduto_ProdutosID",
