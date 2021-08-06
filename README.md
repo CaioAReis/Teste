@@ -30,8 +30,6 @@ Portanto, o presente documento visa criar uma loja online(VesteME) muito agradá
 - [ ] O sistema deve permitir que o cliente realize um pedido.
 - [ ] O sistema deve permitir a alteração dos dados de um cliente.
 - [ ] O sistema deve disponibilizar a efetuação de pagamento.
-- [ ] O sistema deve disponibilizar o rastreamento do pedido enviado para os correios.
-- [ ] O sistema deve permitir o cadastro de promoções.
 - [ ] O sistema deve permitir ao cliente a consulta do frete.
 - [ ] O sistema deve permitir a busca de pedidos
 - [ ] Busca de produtos.
