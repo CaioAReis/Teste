@@ -12,8 +12,6 @@
 }
 
 .login-container section.bigger-tab .seta-icon {
-    background-color: transparent;
-    border: 0;
     margin-top: 40px;
     margin-left: 35px;
     transition: opacity 0.2s;

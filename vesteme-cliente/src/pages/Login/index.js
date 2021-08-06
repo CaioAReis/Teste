@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 
 import './styles.css';
@@ -9,16 +10,18 @@ export default function Login() {
         <div className="login-container">
             
             <section className="bigger-tab">
-                <button className="seta-icon">
-                    <FiArrowLeftCircle size={50} color="#323935" />
-                </button>
+                <div className="seta-icon">
+                    <Link to="/">
+                        <FiArrowLeftCircle size={50} color="#323935" />
+                    </Link>
+                </div>
 
                 <div className="center-itens">
                     <img src={Logo} width="100%" alt="Logo-vesteme"/>
                     <p><strong>Bem vindo(a) de volta</strong></p>
                     <div className="cad-div">
                         <p>Crei sua conta</p>
-                        <button className="button-black">Cadastre-se</button>
+                        <Link to="/cadastro" className="button-black">Cadastre-se</Link>
                     </div>
                 </div>
             </section>
