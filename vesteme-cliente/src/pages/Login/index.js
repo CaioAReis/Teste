@@ -28,8 +28,8 @@ export default function Login() {
             <section className="form-login">
                 <form>
                     <h1>Entre na sua conta</h1>
-                    <input placeholder="Email" type="Email"/>
-                    <input placeholder="Senha" type="password" />
+                    <input type="Email" placeholder="Email" required size="255"/>
+                    <input type="password" placeholder="Senha" required size="255"/>
                     <button className="button" type="submit">Entrar</button>
                 </form>
             </section>

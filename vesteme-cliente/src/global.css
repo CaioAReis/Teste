@@ -28,6 +28,7 @@ form input {
     border: 1px solid #DCDCE6;
     border-radius: 30px;
     padding: 0 24px;
+    font-weight: 700;
 }
 
 .button-black {
