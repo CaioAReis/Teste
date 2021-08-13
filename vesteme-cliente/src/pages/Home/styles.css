@@ -1,6 +1,6 @@
 .home-container {
     width: 100%;
-    /* max-width: 1180px; */
+    max-width: 1380px;
     /* padding: 0 30px; */
     margin: 0 auto;
 }
@@ -62,8 +62,94 @@
 }
 
 .home-container .carrossel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 350px;
-    background-color: darkgray;
-    /* border: 1px solid red; */
+    background-color: #09CE93;
+}
+
+
+.home-container .categorias {
+    width: 95%;
+    /* max-width: 1180px; */
+    margin: 20px auto;
+}
+
+.home-container .categorias h1 {
+    font-size: 18pt;
+    margin-bottom: 20px;
+}
+
+.home-container .categorias ul {
+    list-style: none;
+}
+
+.home-container .categorias ul li {
+    display: inline-block;
+    background-color: #D6EBDF;
+    color: #757575;
+    font-size: 14pt;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 30px;
+    border: 2px solid #323935;
+    margin: 2px;
+}
+
+.home-container .categorias ul li:hover {
+    color: #323935;
+    border: 2px solid #757575;
+}
+
+.home-container .categorias ul li.selected {
+    display: inline-block;
+    background-color: #09CE93;
+    color: #323935;
+    font-size: 14pt;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 30px;
+    border: 2px solid #D6EBDF;
+    margin: 2px;
+}
+
+.home-container .lista-produtos {
+    width: 100%;
+    max-width: 1220px;
+    margin: 50px auto;
+    padding: 10px 20px;
+
+}
+
+.home-container .lista-produtos ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 24px;
+}
+
+.home-container .lista-produtos ul li {
+    background-color: #D6EBDF;
+    color: #323935;
+    padding: 15px;
+    border-radius: 10px;
+
+    border: 5px solid #D6EBDF;
+}
+
+.home-container .lista-produtos ul li:hover {
+    /* color: #09CE93; */
+    border: 5px solid #09CE93;
+}
+
+.home-container .lista-produtos ul li .produto-info h2 {
+    font-size: 25pt;
+    line-height: 70px;
+    text-align: center;
+    
+}
+
+.home-container .lista-produtos ul li .produto-info p {
+    font-size: 12pt;
 }
