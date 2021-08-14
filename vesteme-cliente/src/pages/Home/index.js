@@ -52,81 +52,132 @@ export default function HomePage() {
             <section className="categorias">
                 <h1>Categorias:</h1>
                 <ul>
-                    <li className="selected" >Todos</li>
-                    <li>Camisas</li>
-                    <li>Camisetas</li>
-                    <li>Calças</li>
-                    <li>Bermudas e Shorts</li>
-                    <li>Blusas</li>
-                    <li>Saias</li>
-                    <li>Vestidos</li>
-                    <li>Casacos</li>
-                    <li>Ternos</li>
-                    <li>Meias</li>
+                    <li>
+                        <button className="selected">Todos</button>
+                    </li>
+                    <li>
+                        <button>Camisas</button>
+                    </li>
+                    <li>
+                        <button>Camisetas</button>
+                    </li>
+                    <li>
+                        <button>Calças</button>
+                    </li>
+                    <li>
+                        <button>Bermudas e Shorts</button>
+                    </li>
+                    <li>
+                        <button>Blusas</button>
+                    </li>
+                    <li>
+                        <button>Saias</button>
+                    </li>
+                    <li>
+                        <button>Vestidos</button>
+                    </li>
+                    <li>
+                        <button>Casacos</button>
+                    </li>
+                    <li>
+                        <button>Ternos</button>
+                    </li>
+                    <li>
+                        <button>Meias</button>
+                    </li>
                 </ul>
             </section>
 
             <section className="lista-produtos">
                 <ul>
                     <li>
-                        <img src={Sour4} alt="" />
-                        <div className="produto-info">
-                            <h2>R$ 69.90</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                at ab pariatur eum minus perferendis asperiores. Facilis!
-                            </p>
-                        </div>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
                     </li>
+
                     <li>
-                        <img src={Sour4} alt="" />
-                        <div className="produto-info">
-                            <h2>R$ 69.90</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                at ab pariatur eum minus perferendis asperiores. Facilis!
-                            </p>
-                        </div>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
                     </li>
+                    
                     <li>
-                        <img src={Sour4} alt="" />
-                        <div className="produto-info">
-                            <h2>R$ 69.90</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                at ab pariatur eum minus perferendis asperiores. Facilis!
-                            </p>
-                        </div>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
                     </li>
+
                     <li>
-                        <img src={Sour4} alt="" />
-                        <div className="produto-info">
-                            <h2>R$ 69.90</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                at ab pariatur eum minus perferendis asperiores. Facilis!
-                            </p>
-                        </div>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
                     </li>
+
                     <li>
-                        <img src={Sour4} alt="" />
-                        <div className="produto-info">
-                            <h2>R$ 69.90</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                at ab pariatur eum minus perferendis asperiores. Facilis!
-                            </p>
-                        </div>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
+                    </li>
+
+                    <li>
+                        <button>
+                            <img src={Sour4} alt="" />
+                            <div className="produto-info">
+                                <h2>R$ 69.90</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
+                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
+                                    at ab pariatur eum minus perferendis asperiores. Facilis!
+                                </p>
+                            </div>
+                        </button>
                     </li>
                 </ul>
             </section>

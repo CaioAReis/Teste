@@ -87,6 +87,9 @@
 
 .home-container .categorias ul li {
     display: inline-block;
+}
+
+.home-container .categorias ul button {
     background-color: #D6EBDF;
     color: #757575;
     font-size: 14pt;
@@ -97,12 +100,12 @@
     margin: 2px;
 }
 
-.home-container .categorias ul li:hover {
+.home-container .categorias ul button:hover {
     color: #323935;
     border: 2px solid #757575;
 }
 
-.home-container .categorias ul li.selected {
+.home-container .categorias ul button.selected {
     display: inline-block;
     background-color: #09CE93;
     color: #323935;
@@ -129,7 +132,7 @@
     grid-gap: 24px;
 }
 
-.home-container .lista-produtos ul li {
+.home-container .lista-produtos ul button {
     background-color: #D6EBDF;
     color: #323935;
     padding: 15px;
@@ -138,18 +141,18 @@
     border: 5px solid #D6EBDF;
 }
 
-.home-container .lista-produtos ul li:hover {
+.home-container .lista-produtos ul button:hover {
     /* color: #09CE93; */
     border: 5px solid #09CE93;
 }
 
-.home-container .lista-produtos ul li .produto-info h2 {
+.home-container .lista-produtos ul button .produto-info h2 {
     font-size: 25pt;
     line-height: 70px;
     text-align: center;
     
 }
 
-.home-container .lista-produtos ul li .produto-info p {
+.home-container .lista-produtos ul button .produto-info p {
     font-size: 12pt;
 }
