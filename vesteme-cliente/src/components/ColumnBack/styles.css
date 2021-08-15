@@ -1,0 +1,19 @@
+.back-container {
+    background-color: #09CE93;
+    height: 100vh;
+    width: 7%;
+    min-width: 75px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.back-container a {
+    margin-top: 50px;
+    transition: opacity 0.2s;
+    height: 50px;
+}
+
+.back-container a:hover {
+    opacity: 60%;
+}
