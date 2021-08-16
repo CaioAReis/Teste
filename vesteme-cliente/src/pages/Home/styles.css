@@ -61,6 +61,10 @@
     color: #323935;
 }
 
+.home-container header .info-car a:hover {
+    color: #FFF;
+}
+
 .home-container .carrossel {
     display: flex;
     align-items: center;
