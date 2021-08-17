@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Produto from './pages/Produto';
 import Carrinho from './pages/Carrinho';
+import Perfil from './pages/Perfil';
 
 export default function Routes() {
     return(
@@ -16,6 +17,7 @@ export default function Routes() {
                 <Route path="/cadastro"  component={Cadastro}/>
                 <Route path="/produto"  component={Produto}/>
                 <Route path="/carrinho"  component={Carrinho}/>
+                <Route path="/perfil"  component={Perfil}/>
             </Switch>
         </BrowserRouter>
     );

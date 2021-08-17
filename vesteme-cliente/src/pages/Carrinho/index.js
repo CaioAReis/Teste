@@ -14,7 +14,12 @@ export default function Carrinho() {
                 <h1>Carrinho</h1>
                 <ul>
                     <li>
-                        <img src={Sour} width={100} alt="" />
+                        <div className="dropdown-img">
+                            <img src={Sour} width={80} alt="" />
+                            <div>
+                                <img src={Sour} width={300} alt="" />
+                            </div>
+                        </div>
                         <p>Nome do produto</p>
                         <p>Quantidade: 1</p>
                         <p>Tamanho: M</p>
@@ -23,7 +28,12 @@ export default function Carrinho() {
                     </li>
 
                     <li>
-                        <img src={Sour} width={100} alt="" />
+                        <div className="dropdown-img">
+                            <img src={Sour} width={80} alt="" />
+                            <div>
+                                <img src={Sour} width={300} alt="" />
+                            </div>
+                        </div>
                         <p>Nome do produto</p>
                         <p>Quantidade: 1</p>
                         <p>Tamanho: M</p>
@@ -32,7 +42,12 @@ export default function Carrinho() {
                     </li>
 
                     <li>
-                        <img src={Sour} width={100} alt="" />
+                        <div className="dropdown-img">
+                            <img src={Sour} width={80} alt="" />
+                            <div>
+                                <img src={Sour} width={300} alt="" />
+                            </div>
+                        </div>
                         <p>Nome do produto</p>
                         <p>Quantidade: 1</p>
                         <p>Tamanho: M</p>
