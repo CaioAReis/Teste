@@ -1,6 +1,7 @@
 .back-container {
+    position: fixed;
     background-color: #09CE93;
-    height: 100vh;
+    height: 100ch;
     width: 7%;
     min-width: 75px;
 

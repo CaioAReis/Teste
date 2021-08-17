@@ -1,9 +1,18 @@
+import { useState } from 'react';
+
 import './styles.css';
 import Sour from '../../assets/1.jpg'
 
 import ColumnBack from '../../components/ColumnBack';
 
 export default function Produto() {
+
+    const [counter, setCounter] = useState(1);
+
+    function hundleIncrement() { setCounter(counter + 1); }
+
+    function hundleDecrement() { if (counter > 1) setCounter(counter - 1); }
+
     return(
         <section className="produto-container">
             <ColumnBack />
@@ -16,9 +25,9 @@ export default function Produto() {
                         <div className="quantidade">
                             <p>Quantidade: </p>
                             <div className="qtd-buttons">
-                                <button className="button">+</button>
-                                <p>0</p>
-                                <button className="button">-</button>
+                                <button className="button" onClick={hundleDecrement}>-</button>
+                                <p>{counter}</p>
+                                <button className="button" onClick={hundleIncrement}>+</button>
                             </div>
                         </div>
                         <div className="tamanho">

@@ -6,11 +6,12 @@
     width: 100%;
     padding: 0 30px;
     padding-top: 30px;
+    margin-left: 95px;
 }
 
 .produto-container .produto-main-container h1 {
     font-size: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .produto-container .produto-main-container .produto-info {

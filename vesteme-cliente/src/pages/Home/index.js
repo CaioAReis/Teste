@@ -29,7 +29,7 @@ export default function HomePage() {
                 <div className="info-car">
                     <Link to="/cadastro">Crie sua conta</Link>
                     <Link to="/login">Entrar</Link>
-                    <FiShoppingCart size={40} color="#323935" />
+                    <Link to="/carrinho"><FiShoppingCart size={40} /></Link>
                 </div>
             </header>
 

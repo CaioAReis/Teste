@@ -1,0 +1,104 @@
+.cart-container {
+    display: flex;
+}
+
+.cart-container .cart-main {
+    width: 100%;
+    padding: 30px;
+    margin-left: 95px;
+}
+
+.cart-container .cart-main > h1 {
+    color: #09CE93;
+    font-size: 40px;
+}
+
+.cart-container .cart-main ul {
+    list-style: none;
+    margin: 20px 0;
+    border: 5px solid #09CE93;
+    border-radius: 10px;
+}
+
+.cart-container .cart-main ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-container .cart-main ul li button {
+    background-color: transparent;
+    border: 0;
+    color: #D6EBDF;
+    margin-right: 20px;
+}
+
+.cart-container .cart-main ul li button:hover {
+    color: rgb(247, 55, 55);
+}
+
+.cart-container .cart-main .frete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-container .cart-main .frete form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF;
+    border-radius: 30px;
+}
+
+.cart-container .cart-main .frete form input {
+    border: 0;
+}
+
+.cart-container .cart-main .frete form button {
+    margin: 0;
+}
+
+.cart-container .cart-main .endereco-cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 2px solid #D6EBDF;
+    border-top: 2px solid #D6EBDF;
+    margin-bottom: 20px;
+}
+
+.cart-container .cart-main .endereco-cart button {
+    margin: 0;
+    width: 20%;
+}
+
+.cart-container .cart-main .endereco-cart div {
+    font-size: 15px;
+    width: 70%;
+}
+
+.cart-container .cart-main .endereco-cart h1 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.cart-container .cart-main .valor-cart {
+    width: 100%;
+}
+
+.cart-container .cart-main .valor-cart div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.cart-container .cart-main .valor-cart button {
+    width: 40%;
+    float: right;
+}
