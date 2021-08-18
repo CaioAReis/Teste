@@ -1,0 +1,104 @@
+.compra-container {
+    display: flex;
+}
+
+.compra-container .compra-main {
+    width: 100%;
+    padding: 30px;
+    margin-left: 95px;
+}
+
+.compra-container .compra-main > h1 {
+    color: #09CE93;
+    font-size: 40px;
+}
+
+.compra-container .compra-main ul {
+    list-style: none;
+    border: 5px solid #09CE93;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.compra-container .compra-main ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.compra-container .compra-main ul li:hover {
+    background-color: #46504a;
+}
+
+.compra-container .compra-main .frete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.compra-container .compra-main .valor-compra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 30px;
+    padding: 30px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #D6EBDF;
+}
+
+.compra-container .compra-main button {
+    width: 40%;
+    float: right;
+}
+
+.compra-container .compra-main .compra-pagamento {
+    width: 100%;
+}
+
+.compra-container .compra-main .compra-pagamento form {
+    width: 100%;
+}
+
+.compra-container .compra-main .compra-pagamento form div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 300px;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.compra-container .compra-main .compra-pagamento form div > label {
+    display: flex;
+    align-items: inherit;
+    justify-content: space-around;
+    width: 40%;
+    height: 100%;
+    border-radius: 30px;
+    border: 5px solid #46504a;
+    font-weight: 700;
+    color: #46504a;
+}
+
+.compra-container .compra-main .compra-pagamento form div > label:hover {
+    border: 5px solid #D6EBDF;
+    color: #D6EBDF;
+}
+
+.compra-container .compra-main .compra-pagamento form div > label input {
+    all: unset;
+    margin: 0 40px;
+    width: 35.5%;
+    height: 300px;
+    position: absolute;
+    border-radius: 30px;
+}
+
+.compra-container .compra-main .compra-pagamento form div > label input[type=radio]:checked {
+    background-color: #09CE93;
+    
+}

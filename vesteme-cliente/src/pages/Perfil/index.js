@@ -2,7 +2,7 @@ import ColumnBack from '../../components/ColumnBack';
 
 import './styles.css';
 
-import Sour from '../../assets/1.jpg';
+// import Sour from '../../assets/1.jpg';
 
 export default function Perfil() {
     return(

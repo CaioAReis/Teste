@@ -51,11 +51,20 @@
     margin: 0;
     padding: 0;
     line-height: 30px;
-    font-size: 20px;
+    font-size: 30px;
     padding: 0;
     width: 40px;
     height: 40px;
 }
+
+.produto-container .produto-main-container .produto-info .quantidade button:hover {
+    border: 3px solid #FFF;
+}
+
+.produto-container .produto-main-container .produto-info .quantidade button:active {
+    color: #FFF;
+}
+
 
 .produto-container .produto-main-container .produto-info .tamanho {
     display: flex;

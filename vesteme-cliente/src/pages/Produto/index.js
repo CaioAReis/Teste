@@ -8,9 +8,10 @@ import ColumnBack from '../../components/ColumnBack';
 export default function Produto() {
 
     const [counter, setCounter] = useState(1);
+    const value = 79.99;
+    const estoque = 6;
 
-    function hundleIncrement() { setCounter(counter + 1); }
-
+    function hundleIncrement() { if (counter < estoque) setCounter(counter + 1); }
     function hundleDecrement() { if (counter > 1) setCounter(counter - 1); }
 
     return(
@@ -21,7 +22,7 @@ export default function Produto() {
                 <div className="produto-info">
                     <img src={Sour} alt="" />
                     <div>
-                        <h1 className="valor">R$ 79,99</h1>
+                        <h1 className="valor">R$ {(value * counter).toFixed(2)}</h1>
                         <div className="quantidade">
                             <p>Quantidade: </p>
                             <div className="qtd-buttons">
