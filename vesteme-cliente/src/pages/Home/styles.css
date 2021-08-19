@@ -19,10 +19,11 @@
 }
 
 .home-container header .search-form {
-    width: 50%;
+    width: 40%;
     height: 42px;
     background-color: #FFF;
     border-radius: 30px;
+    margin-inline: 30px;
 }
 
 .home-container header .search-form form {
@@ -46,7 +47,7 @@
 }
 
 .home-container header .info-car {
-    width: 25%;
+    width: 35%;
     margin-right: 2%;
     padding: 0 10px;
     display: flex;
@@ -72,7 +73,6 @@
     width: 100%;
     background-color: #09CE93;
 }
-
 
 .home-container .categorias {
     width: 95%;

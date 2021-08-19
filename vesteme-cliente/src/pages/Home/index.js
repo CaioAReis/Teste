@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -12,10 +12,30 @@ import Sour3 from '../../assets/3.png'
 import Sour4 from '../../assets/1.jpg'
 
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
+import { AiOutlinePoweroff } from 'react-icons/ai';
 
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.svg';
 
 export default function HomePage() {
+
+    const UserLogged = () => { return <Link to="/perfil" title="Acessar perfil">João Rodrigues Santana</Link> }
+    const UserNoLogged = () => { return <Link to="/cadastro">Crie sua conta</Link> }
+    const Greeting = (props) => {
+        const isLogged = props.isLogged;
+        if (isLogged) return <UserLogged />
+        return <UserNoLogged />
+    }
+
+    const UserLogged2 = () => { return <Link to="/login" title="Sair"><AiOutlinePoweroff size={40} /></Link> }
+    const UserNoLogged2 = () => { return <Link to="/login">Entrar</Link> }
+    const Greeting2 = (props) => {
+        const isLogged = props.isLogged;
+        if (isLogged) return <UserLogged2 />
+        return <UserNoLogged2 />
+    }
+
+    const [selected] = useState("");
+
     return(
         <section className="home-container">
             <header className="home-header">
@@ -27,9 +47,9 @@ export default function HomePage() {
                     </form>
                 </div>
                 <div className="info-car">
-                    <Link to="/cadastro">Crie sua conta</Link>
-                    <Link to="/login">Entrar</Link>
-                    <Link to="/carrinho"><FiShoppingCart size={40} /></Link>
+                    <Greeting isLogged={true} />
+                    <Greeting2 isLogged={true} />
+                    <Link to="/carrinho" title="Carrinho de compras"><FiShoppingCart size={40} /></Link>
                 </div>
             </header>
 
@@ -53,37 +73,37 @@ export default function HomePage() {
                 <h1>Categorias:</h1>
                 <ul>
                     <li>
-                        <button className="selected">Todos</button>
+                        <button className={selected}>Todos</button>
                     </li>
                     <li>
-                        <button>Camisas</button>
+                        <button className={selected}>Camisas</button>
                     </li>
                     <li>
-                        <button>Camisetas</button>
+                        <button className={selected}>Camisetas</button>
                     </li>
                     <li>
-                        <button>Calças</button>
+                        <button className={selected}>Calças</button>
                     </li>
                     <li>
-                        <button>Bermudas e Shorts</button>
+                        <button className={selected}>Bermudas e Shorts</button>
                     </li>
                     <li>
-                        <button>Blusas</button>
+                        <button className={selected}>Blusas</button>
                     </li>
                     <li>
-                        <button>Saias</button>
+                        <button className={selected}>Saias</button>
                     </li>
                     <li>
-                        <button>Vestidos</button>
+                        <button className={selected}>Vestidos</button>
                     </li>
                     <li>
-                        <button>Casacos</button>
+                        <button className={selected}>Casacos</button>
                     </li>
                     <li>
-                        <button>Ternos</button>
+                        <button className={selected}>Ternos</button>
                     </li>
                     <li>
-                        <button>Meias</button>
+                        <button className={selected}>Meias</button>
                     </li>
                 </ul>
             </section>
