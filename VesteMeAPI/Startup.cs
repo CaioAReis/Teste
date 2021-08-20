@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using VesteMeAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using VesteMeAPI.Services.IServices;
+using VesteMeAPI.Services;
 
 namespace VesteMeAPI
 {
@@ -30,6 +32,8 @@ namespace VesteMeAPI
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AplicationDBContext>(option => 
                 option.UseMySql(connectionString, MySqlServerVersion.AutoDetect(connectionString)));
+
+            services.AddScoped<ICategoriaService, CategoriaService>();
 
             services.AddControllers();
         }
