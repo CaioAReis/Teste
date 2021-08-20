@@ -67,9 +67,7 @@ namespace VesteMeAPI.Controllers
                 if (categoria.ID == id) {
                     await _categoriaService.AtualizarCategoria(categoria);
                     return NoContent();
-                } else {
-                    return BadRequest("Dados inconssistentes");
-                }
+                } else return BadRequest("Dados inconssistentes");
             }
             catch
             {

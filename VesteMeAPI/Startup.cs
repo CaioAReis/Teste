@@ -34,6 +34,7 @@ namespace VesteMeAPI
                 option.UseMySql(connectionString, MySqlServerVersion.AutoDetect(connectionString)));
 
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
 
             services.AddControllers();
         }
