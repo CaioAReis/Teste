@@ -7,7 +7,7 @@ namespace VesteMeAPI.Services.IServices
 {
     public interface IProdutoService
     {
-        Task<IEnumerable<Produto>> ListarTodosProdutos();
+        Task<IEnumerable<Produto>> ListarProdutos();
         Task<IEnumerable<Produto>> ListarProdutosPorCategoria(int idCategoria);
         Task<IEnumerable<Produto>> ListarProdutosPorNome(string nomeProduto);
         Task<IEnumerable<Produto>> ListarProdutosPorTamanho(int idTamanho);

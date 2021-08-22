@@ -38,6 +38,7 @@ namespace VesteMeAPI
             services.AddScoped<IPedidoService, PedidoService>();
             services.AddScoped<ITamanhoService, TamanhoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             services.AddControllers();
         }
