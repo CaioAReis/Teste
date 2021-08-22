@@ -7,7 +7,7 @@ namespace VesteMeAPI.Services.IServices
 {
     public interface ITamanhoService
     {
-        Task<IEnumerable<Tamanho>> ListarTodosTamanhos();
+        Task<IEnumerable<Tamanho>> ListarTamanhos();
         Task<Tamanho> BuscarTamanho(int idTamanho);
         Task CriarTamanho(Tamanho tamanho);
         Task AtualizarTamanho(Tamanho tamanho);

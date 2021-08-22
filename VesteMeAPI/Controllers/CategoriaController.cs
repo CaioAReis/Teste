@@ -19,10 +19,10 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IAsyncEnumerable<Categoria>>> ListarTodasCategorias() {
+        public async Task<ActionResult<IAsyncEnumerable<Categoria>>> ListarCategorias() {
             try
             {
-                var categorias = await _categoriaService.ListarTodasCategorias();
+                var categorias = await _categoriaService.ListarCategorias();
                 return Ok(categorias);
             }
             catch
@@ -52,7 +52,7 @@ namespace VesteMeAPI.Controllers
             try
             {
                 await _categoriaService.CriarCategoria(categoria);
-                return CreatedAtAction(nameof(ListarTodasCategorias), new { id = categoria.ID}, categoria);
+                return CreatedAtAction(nameof(ListarCategorias), new { id = categoria.ID}, categoria);
             }
             catch
             {

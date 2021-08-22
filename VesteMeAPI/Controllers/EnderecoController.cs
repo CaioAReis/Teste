@@ -23,9 +23,8 @@ namespace VesteMeAPI.Controllers
             try
             {
                 var endereco = await _enderecoService.BuscarEndereco(id);
-                if (endereco == null) 
-                    return NotFound($"Endereço com o ID: {id} não foi encontrado.");
-                return Ok(endereco);
+                if (endereco != null) return Ok(endereco);
+                return NotFound($"Endereço com o ID: {id} não foi encontrado.");
             }
             catch
             {
@@ -38,23 +37,9 @@ namespace VesteMeAPI.Controllers
         {
             try
             {
-                //  Forma prvisória até a implementação dos serviços de usuário
-                var usuario = new Usuario();
-                usuario.Nome = "Caio";
-                usuario.Email = "Caio@mail.com";
-                usuario.Senha = "12345";
-                usuario.CPF = "000.000.000-00";
-                usuario.EnderecoID = 1;
-                usuario.DataNascimento = System.DateTime.Now;
-
-                if (usuario != null) {
-                    if (usuario.EnderecoID != null) {
-                        var endereco = await _enderecoService.BuscarEnderecoDoUsuario(usuario);
-                        return Ok(endereco);
-                    }
-                    return NotFound("O usuário ainda não definiu um endereço.");
-                }
-                return NotFound($"Usuário com o ID: {id} não foi encontrado.");
+                var endereco = await _enderecoService.BuscarEndereco(id);
+                if (endereco != null) return Ok(endereco);
+                return NotFound("O usuário ainda não definiu um endereço.");
             }
             catch
             {
@@ -91,6 +76,5 @@ namespace VesteMeAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar o endereço.");
             }
         }
-
     }
 }

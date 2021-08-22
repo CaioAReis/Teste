@@ -29,7 +29,7 @@ namespace VesteMeAPI.Models
 
         [DataType(DataType.Date)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public DateTime DataPedido { get; set; } = DateTime.Now;
+        public DateTime? DataPedido { get; set; } = DateTime.Now;
 
         public virtual ICollection<Produto> Produtos { get; set; }
     }

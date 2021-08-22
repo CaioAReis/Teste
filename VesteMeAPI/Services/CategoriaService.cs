@@ -19,7 +19,7 @@ namespace VesteMeAPI.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Categoria>> ListarTodasCategorias()
+        public async Task<IEnumerable<Categoria>> ListarCategorias()
         {
             return await _context.Categorias.ToListAsync();
         }

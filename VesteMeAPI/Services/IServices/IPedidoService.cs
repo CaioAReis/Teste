@@ -8,11 +8,9 @@ namespace VesteMeAPI.Services.IServices
 {
     public interface IPedidoService
     {
-        Task<IEnumerable<Pedido>> ListasTodosPedidos();
-        Task<IEnumerable<Pedido>> ListarTodosPedidosPorData(DateTime data);
-        Task<IEnumerable<Pedido>> ListarTodosPedidosDoUsuario(int idUsuario);
-        Task<IEnumerable<Pedido>> ListarTodosPedidosDoUsuarioPorData(int idUsuario, DateTime data);
-        Task<IEnumerable<Produto>> ListarProdutosDoPedido(int idPedido);
+        Task<IEnumerable<Pedido>> ListarPedidos();
+        Task<IEnumerable<Pedido>> ListarPedidosDoUsuario(int idUsuario);
+        IEnumerable<Produto> ListarProdutosDoPedido(Pedido pedido);
         Task<Pedido> BuscarPedido(int idPedido);
         Task CriarPedido(Pedido pedido);
         Task AtualizarPedido(Pedido pedido);
