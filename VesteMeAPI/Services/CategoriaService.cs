@@ -26,7 +26,7 @@ namespace VesteMeAPI.Services
 
         public async Task<Categoria> BuscarCategoria(int idCategoria)
         {
-            var categoria = await _context.Categorias.FindAsync(idCategoria);
+            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.ID == idCategoria);
             return categoria;
         }
 

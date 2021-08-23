@@ -20,13 +20,7 @@ namespace VesteMeAPI.Services
 
         public async Task<Endereco> BuscarEndereco(int idEndereco)
         {
-            var endereco = await _context.Enderecos.FindAsync(idEndereco);
-            return endereco;
-        }
-
-        public async Task<Endereco> BuscarEnderecoDoUsuario(int idUsuario)
-        {
-            var endereco = await _context.Enderecos.FirstOrDefaultAsync(end => end.UsuarioID == idUsuario);
+            var endereco = await _context.Enderecos.FirstOrDefaultAsync(e => e.ID == idEndereco);
             return endereco;
         }
 

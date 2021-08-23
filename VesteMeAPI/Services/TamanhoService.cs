@@ -26,7 +26,7 @@ namespace VesteMeAPI.Services
 
         public async Task<Tamanho> BuscarTamanho(int idTamanho)
         {
-            var tamanho = await _context.Tamanhos.FindAsync(idTamanho);
+            var tamanho = await _context.Tamanhos.FirstOrDefaultAsync(t => t.ID == idTamanho);
             return tamanho;
         }
 

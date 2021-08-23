@@ -48,7 +48,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmailESenha([FromBody] Usuario usuario)
+        public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmailESenha([FromBody] UsuarioDTO usuario)
         {
             try
             {

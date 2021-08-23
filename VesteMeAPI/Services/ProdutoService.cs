@@ -27,7 +27,7 @@ namespace VesteMeAPI.Services
          public async Task<IEnumerable<Produto>> ListarProdutosPorNome(string nomeProduto)
         {
             IEnumerable<Produto> produtos;
-            if (string.IsNullOrWhiteSpace(nomeProduto)) {
+            if (!string.IsNullOrWhiteSpace(nomeProduto)) {
                 produtos = await _context.Produtos.Where(n => n.Nome.Contains(nomeProduto)).ToListAsync();
             } 
             else 
@@ -51,7 +51,7 @@ namespace VesteMeAPI.Services
 
         public async Task<Produto> BuscarProduto(int idProduto)
         {
-            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ID ==idProduto);
+            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ID == idProduto);
             return produto;
         }
 

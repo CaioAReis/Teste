@@ -33,7 +33,7 @@ namespace VesteMeAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("nome")]
         public async Task<ActionResult<IAsyncEnumerable<Produto>>> ListarProdutosPorNome([FromQuery] string nome)
         {
             try
@@ -127,10 +127,10 @@ namespace VesteMeAPI.Controllers
         {
             try
             {
-                var produto = _produtoService.BuscarProduto(id);
+                var produto = await _produtoService.BuscarProduto(id);
                 if (produto != null) 
                 {
-                    await _produtoService.RemoverProduto(produto.Result);
+                    await _produtoService.RemoverProduto(produto);
                     return NoContent();
                 } 
                 else return NotFound("Produto com ID: {id} não foi encontrado.");

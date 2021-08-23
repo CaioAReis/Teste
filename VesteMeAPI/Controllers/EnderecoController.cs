@@ -32,21 +32,6 @@ namespace VesteMeAPI.Controllers
             }
         }
 
-        [HttpGet("usuario/{id}")]
-        public async Task<ActionResult<Endereco>> BuscarEnderecoDoUsuario(int id) 
-        {
-            try
-            {
-                var endereco = await _enderecoService.BuscarEndereco(id);
-                if (endereco != null) return Ok(endereco);
-                return NotFound("O usuário ainda não definiu um endereço.");
-            }
-            catch
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao buscar o endereço.");
-            }
-        }
-
         [HttpPost]
         public async Task<ActionResult> CriarEndereco([FromBody] Endereco endereco) 
         {
@@ -76,5 +61,6 @@ namespace VesteMeAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar o endereço.");
             }
         }
+
     }
 }

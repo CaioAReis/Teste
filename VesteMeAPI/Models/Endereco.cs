@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VesteMeAPI.Models
 {
@@ -6,9 +7,6 @@ namespace VesteMeAPI.Models
     {
         [Key]
         public int ID { get; set; }
-
-        public int UsuarioID { get; set; }
-        public Usuario Usuario { get; set; }
 
         [MaxLength(255)]
         [Required(ErrorMessage = "Nome do Estado é obrigatório.", AllowEmptyStrings = false)]

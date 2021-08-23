@@ -15,7 +15,7 @@ namespace VesteMeAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.7");
+                .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("PedidoProduto", b =>
                 {
@@ -185,7 +185,7 @@ namespace VesteMeAPI.Migrations
                     b.Property<DateTime>("DataEntrega")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("DataPedido")
+                    b.Property<DateTime?>("DataPedido")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("PagamentoID")
@@ -380,7 +380,7 @@ namespace VesteMeAPI.Migrations
                         {
                             ID = 1,
                             CPF = "000.000.000-00",
-                            DataNascimento = new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            DataNascimento = new DateTime(2021, 8, 22, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "Admin@admin.com.br",
                             Nome = "Administrador",
                             Senha = "Admin@admin.com.br",

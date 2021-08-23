@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VesteMeAPI.Migrations
 {
-    public partial class INICIAL : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -204,7 +204,7 @@ namespace VesteMeAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ValorTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     DataEntrega = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -297,7 +297,7 @@ namespace VesteMeAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "ID", "CPF", "Celular", "DataNascimento", "Email", "EnderecoID", "Nome", "Senha", "Telefone", "TipoUsuarioID" },
-                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 7, 27, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
+                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 8, 22, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PedidoProduto_ProdutosID",

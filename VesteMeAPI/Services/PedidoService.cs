@@ -26,7 +26,7 @@ namespace VesteMeAPI.Services
 
         public async Task<Pedido> BuscarPedido(int idPedido)
         {
-            var pedido = await _context.Pedidos.FindAsync(idPedido);
+            var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.ID == idPedido);
             return pedido;
         }
 

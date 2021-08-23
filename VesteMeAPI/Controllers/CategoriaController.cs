@@ -25,8 +25,9 @@ namespace VesteMeAPI.Controllers
                 var categorias = await _categoriaService.ListarCategorias();
                 return Ok(categorias);
             }
-            catch
+            catch (System.Exception e)
             {
+                System.Console.WriteLine(e);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao obter categorias.");
             }
         }
