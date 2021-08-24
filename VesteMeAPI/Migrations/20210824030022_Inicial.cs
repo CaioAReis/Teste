@@ -142,9 +142,9 @@ namespace VesteMeAPI.Migrations
                     Senha = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DataNascimento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Celular = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
+                    Celular = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: true)
+                    Telefone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     TipoUsuarioID = table.Column<int>(type: "int", nullable: true),
                     EnderecoID = table.Column<int>(type: "int", nullable: true)
@@ -297,7 +297,7 @@ namespace VesteMeAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "ID", "CPF", "Celular", "DataNascimento", "Email", "EnderecoID", "Nome", "Senha", "Telefone", "TipoUsuarioID" },
-                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 8, 22, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
+                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PedidoProduto_ProdutosID",

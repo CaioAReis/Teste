@@ -1,11 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
+
+import api from '../../services/api';
 
 import './styles.css';
 import Logo from '../../assets/logo.svg'
 
 export default function Login() {
+
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    const history = useHistory();
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        const data = { email, senha };
+
+        try {
+            const response = await api.post('/api/usuario/login', data);
+            localStorage.setItem('userID', response.data.usu.id);
+            localStorage.setItem('userName', response.data.usu.nome);
+            // localStorage.setItem('userToken', response.data.token);
+            
+            if (response.data.usu.tipoUsuarioID === 1) history.push('admin');
+            else if (response.data.usu.tipoUsuarioID === 2) history.push('/');
+        } catch (error) {
+            alert('Email ou senha inválidos. Tente novamente.');
+        }
+    }
+
     return(
         <div className="login-container">
             
@@ -26,10 +52,23 @@ export default function Login() {
                 </div>
             </section>
             <section className="form-login">
-                <form>
+                <form onSubmit={handleLogin}>
                     <h1>Entre na sua conta</h1>
-                    <input type="Email" placeholder="Email" required size="255"/>
-                    <input type="password" placeholder="Senha" required size="255"/>
+                    <input 
+                        type="Email" 
+                        placeholder="Email" 
+                        required size="255"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+
+                    <input 
+                        type="password" 
+                        placeholder="Senha" 
+                        required size="255"
+                        value={senha}
+                        onChange={e => setSenha(e.target.value)}
+                    />
                     <button className="button" type="submit">Entrar</button>
                 </form>
             </section>

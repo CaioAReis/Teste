@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VesteMeAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IAsyncEnumerable<Categoria>>> ListarCategorias() {
             try
             {
@@ -33,6 +35,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<Categoria>> BuscarCategoria(int id) {
             try
             {
@@ -49,6 +52,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> CriarCategoria([FromBody] Categoria categoria) {
             try
             {
@@ -62,6 +66,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> AtualizarCategoria(int id, [FromBody] Categoria categoria) {
             try
             {
@@ -75,6 +80,5 @@ namespace VesteMeAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao atualizar a categoria.");
             }
         }
-
     }
 }

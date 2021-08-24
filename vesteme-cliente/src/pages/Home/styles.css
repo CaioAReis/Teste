@@ -49,10 +49,21 @@
 .home-container header .info-car {
     width: 35%;
     margin-right: 2%;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.home-container header .info-car div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.home-container header .info-car div a:nth-child(2) {
+    margin-inline: 40px;
 }
 
 .home-container header .info-car a {
@@ -86,6 +97,9 @@
 }
 
 .home-container .categorias ul {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
     list-style: none;
 }
 

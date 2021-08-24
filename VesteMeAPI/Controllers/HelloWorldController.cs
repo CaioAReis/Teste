@@ -13,10 +13,7 @@ namespace VesteMeAPI.Controllers
     {
         //  Testando o controller
         [HttpGet]
-        public string HelloWorld()
-        {
-            return "Hello World, Web API with ASP.Net Core.";
-        }
+        public string HelloWorld() => "Hello World, Web API with ASP.Net Core.";
 
         [HttpGet("anonimo")]
         [AllowAnonymous]

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VesteMeAPI.Models;
@@ -20,6 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IAsyncEnumerable<Tamanho>>> ListarTamanhos()
         {
             try
@@ -34,6 +36,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<Tamanho>> BuscarTamanho(int id)
         {
             try
@@ -49,6 +52,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> CriarTamanho([FromBody] Tamanho tamanho)
         {
             try
@@ -63,6 +67,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> AtualizarTamanho(int id, [FromBody] Tamanho tamanho)
         {
             try

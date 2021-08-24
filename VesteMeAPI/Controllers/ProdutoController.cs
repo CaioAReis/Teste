@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VesteMeAPI.Models;
@@ -20,6 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IAsyncEnumerable<Produto>>> ListarProdutos()
         {
             try
@@ -34,6 +36,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("nome")]
+        [AllowAnonymous]
         public async Task<ActionResult<IAsyncEnumerable<Produto>>> ListarProdutosPorNome([FromQuery] string nome)
         {
             try
@@ -50,6 +53,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("categoria/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<IAsyncEnumerable<Produto>>> ListarProdutosPorCategoria(int id)
         {
             try
@@ -64,6 +68,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("tamanho/{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<IAsyncEnumerable<Produto>>> ListarProdutosPorTamanho(int id)
         {
             try
@@ -78,6 +83,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Produto>> BuscarProduto(int id)
         {
             try
@@ -93,6 +99,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> CriarProduto([FromBody] Produto produto)
         {
             try
@@ -107,6 +114,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> AtualizarProduto(int id, [FromBody] Produto produto)
         {
             try
@@ -123,6 +131,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> RemoverProduto(int id)
         {
             try

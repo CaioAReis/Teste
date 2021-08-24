@@ -32,11 +32,11 @@ namespace VesteMeAPI.Models
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(20)]
         [DataType(DataType.PhoneNumber)]
         public string Celular { get; set; }
 
-        [MaxLength(15)]
+        [MaxLength(20)]
         [DataType(DataType.PhoneNumber)]
         public string Telefone { get; set; }
 

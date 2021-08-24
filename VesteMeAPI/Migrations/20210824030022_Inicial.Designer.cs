@@ -9,7 +9,7 @@ using VesteMeAPI.Data;
 namespace VesteMeAPI.Migrations
 {
     [DbContext(typeof(AplicationDBContext))]
-    [Migration("20210822234842_Inicial")]
+    [Migration("20210824030022_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -338,8 +338,8 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Celular")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime(6)");
@@ -363,8 +363,8 @@ namespace VesteMeAPI.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Telefone")
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int?>("TipoUsuarioID")
                         .HasColumnType("int");
@@ -382,7 +382,7 @@ namespace VesteMeAPI.Migrations
                         {
                             ID = 1,
                             CPF = "000.000.000-00",
-                            DataNascimento = new DateTime(2021, 8, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            DataNascimento = new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "Admin@admin.com.br",
                             Nome = "Administrador",
                             Senha = "Admin@admin.com.br",

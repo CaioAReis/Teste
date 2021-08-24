@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<IAsyncEnumerable<Usuario>>> ListarUsuarios()
         {
             try
@@ -35,6 +36,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<Usuario>> BuscarUsuario(int id)
         {
             try
@@ -57,11 +59,11 @@ namespace VesteMeAPI.Controllers
             {
                 var usu = await _usuarioService.BuscarUsuarioPorEmailESenha(usuario.Email, usuario.Senha);
                 if (usu != null) {
-                    var token = TokenService.GenerateToken(usu);
+                    //var token = TokenService.GenerateToken(usu);
                     usu.Senha = "";
                     return new {
                         usu = usu,
-                        token = token
+                        //token = token
                     };
                 }
                 else return NotFound("Email ou senha inválidos");
@@ -73,6 +75,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> CriarUsuario([FromBody] Usuario usuario)
         {
             try
@@ -87,6 +90,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult> AtualizarUsuario(int id, [FromBody] Usuario usuario)
         {
             try

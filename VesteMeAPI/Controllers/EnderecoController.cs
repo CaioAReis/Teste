@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VesteMeAPI.Models;
@@ -18,6 +19,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Endereco>> BuscarEndereco(int id) 
         {
             try
@@ -33,6 +35,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CriarEndereco([FromBody] Endereco endereco) 
         {
             try
@@ -47,6 +50,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult> AtualizarEndereco(int id, [FromBody] Endereco endereco) 
         {
             try
@@ -61,6 +65,5 @@ namespace VesteMeAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar o endereço.");
             }
         }
-
     }
 }

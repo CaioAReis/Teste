@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 import './styles.css';
 
-import Sour1 from '../../assets/1.png'
-import Sour2 from '../../assets/2.png'
-import Sour3 from '../../assets/3.png'
+import api from '../../services/api';
 
-import Sour4 from '../../assets/1.jpg'
+import Slide1 from '../../assets/1.png'
+import Slide2 from '../../assets/2.png'
+import Slide3 from '../../assets/3.png'
 
 import { FiSearch, FiShoppingCart } from 'react-icons/fi';
 import { AiOutlinePoweroff } from 'react-icons/ai';
@@ -18,23 +18,40 @@ import Logo from '../../assets/logo.svg';
 
 export default function HomePage() {
 
-    const UserLogged = () => { return <Link to="/perfil" title="Acessar perfil">João Rodrigues Santana</Link> }
-    const UserNoLogged = () => { return <Link to="/cadastro">Crie sua conta</Link> }
+    const [produtos, setProdutos] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+
+    const userID = localStorage.getItem('userID');
+    const userName = localStorage.getItem('userName');
+
+    useEffect(() => {
+        api.get('api/produto').then(response => {
+            setProdutos(response.data);
+        });
+        api.get('api/categoria').then(response => {
+            setCategorias(response.data);
+        })
+    }, [userID]);
+
+    const UserLogged = () => { 
+        return <div>
+            <Link to="/perfil" title="Acessar perfil">{userName}</Link>
+            <Link to="/login" title="Sair"><AiOutlinePoweroff size={40}/></Link>
+        </div>}
+
+    const UserUnLogged = () => { 
+        return <div> 
+            <Link to="/cadastro">Crie sua conta</Link> 
+            <Link to="/login">Entrar</Link>
+        </div>}
+
     const Greeting = (props) => {
         const isLogged = props.isLogged;
         if (isLogged) return <UserLogged />
-        return <UserNoLogged />
+        return <UserUnLogged />
     }
 
-    const UserLogged2 = () => { return <Link to="/login" title="Sair"><AiOutlinePoweroff size={40} /></Link> }
-    const UserNoLogged2 = () => { return <Link to="/login">Entrar</Link> }
-    const Greeting2 = (props) => {
-        const isLogged = props.isLogged;
-        if (isLogged) return <UserLogged2 />
-        return <UserNoLogged2 />
-    }
-
-    const [selected] = useState("");
+    const [selected] = useState("selected");
 
     return(
         <section className="home-container">
@@ -47,8 +64,7 @@ export default function HomePage() {
                     </form>
                 </div>
                 <div className="info-car">
-                    <Greeting isLogged={true} />
-                    <Greeting2 isLogged={true} />
+                    <Greeting isLogged={userName != null ? true : false} />
                     <Link to="/carrinho" title="Carrinho de compras"><FiShoppingCart size={40} /></Link>
                 </div>
             </header>
@@ -56,15 +72,15 @@ export default function HomePage() {
             <section className="carrossel">
                 <Carousel autoPlay={true} infiniteLoop={true} showArrows={true} showThumbs={false} showStatus={false}>
                     <div>
-                        <img src={Sour1} alt="Slide de boas vindas" />
+                        <img src={Slide1} alt="Slide de boas vindas" />
                     </div>
 
                     <div>
-                        <img src={Sour2} alt="Slide sobre os melhores produtos"/>
+                        <img src={Slide2} alt="Slide sobre os melhores produtos"/>
                     </div>
 
                     <div>
-                        <img src={Sour3} alt="Slide sobre a variedade"/>
+                        <img src={Slide3} alt="Slide sobre a variedade"/>
                     </div>
                 </Carousel>
             </section>
@@ -75,131 +91,27 @@ export default function HomePage() {
                     <li>
                         <button className={selected}>Todos</button>
                     </li>
-                    <li>
-                        <button className={selected}>Camisas</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Camisetas</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Calças</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Bermudas e Shorts</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Blusas</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Saias</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Vestidos</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Casacos</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Ternos</button>
-                    </li>
-                    <li>
-                        <button className={selected}>Meias</button>
-                    </li>
+                    {categorias.map(categoria => (
+                        <li key={categoria.id}>
+                            <button>{categoria.nome}</button>
+                        </li>
+                    ))}
                 </ul>
             </section>
 
             <section className="lista-produtos">
                 <ul>
                     <li>
-                        <Link to="/produto">
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
+                        {produtos.map(produto => (
+                            <Link to={`/produto/${produto.id}`} key={produto.id}>
+                                <img src={produto.imagem} alt="Imagem do produto" />
+                                <div className="produto-info">
+                                    <h2>{produto.valor}</h2>
+                                    <p>{produto.nome}</p>
+                                </div>
+                            </Link>
+                        ))}
                     </li>
-
-                    <li>
-                        <Link>
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link>
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link>
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link>
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link>
-                            <img src={Sour4} alt="" />
-                            <div className="produto-info">
-                                <h2>R$ 69.90</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Quibusdam perspiciatis, optio officia soluta minima quia. 
-                                    Sit, rerum aliquam dolores laboriosam soluta consectetur 
-                                    at ab pariatur eum minus perferendis asperiores. Facilis!
-                                </p>
-                            </div>
-                        </Link>
-                    </li>
-                    
                 </ul>
             </section>
         </section>

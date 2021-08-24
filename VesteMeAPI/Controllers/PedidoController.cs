@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VesteMeAPI.Models;
@@ -19,6 +20,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult<IAsyncEnumerable<Pedido>>> ListarPedidos()
         {
             try
@@ -33,6 +35,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<IAsyncEnumerable<Pedido>>> BuscarPedido(int id) 
         {
             try
@@ -48,6 +51,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("produtos/{id}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Produto>>> ListarProdutosDoPedido(int id) 
         {
             try
@@ -63,6 +67,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("usuario/{id}")]
+        [Authorize]
         public async Task<ActionResult<IAsyncEnumerator<Pedido>>> ListarPedidosDoUsuario(int id) 
         {
             try
@@ -77,6 +82,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> CriarPedido([FromBody] Pedido pedido) 
         {
             try
@@ -91,6 +97,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> AtualizarPedido(int id, [FromBody] Pedido pedido)
         {
             try
