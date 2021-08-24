@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VesteMeAPI.Models;
+using VesteMeAPI.Services;
 using VesteMeAPI.Services.IServices;
 
 namespace VesteMeAPI.Controllers 
@@ -48,13 +50,21 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Usuario>> BuscarUsuarioPorEmailESenha([FromBody] UsuarioDTO usuario)
+        [AllowAnonymous]
+        public async Task<ActionResult<dynamic>> BuscarUsuarioPorEmailESenha([FromBody] UsuarioDTO usuario)
         {
             try
             {
                 var usu = await _usuarioService.BuscarUsuarioPorEmailESenha(usuario.Email, usuario.Senha);
-                if (usu != null) return Ok(usu);
-                else return NotFound("Usuário não encontrado!");
+                if (usu != null) {
+                    var token = TokenService.GenerateToken(usu);
+                    usu.Senha = "";
+                    return new {
+                        usu = usu,
+                        token = token
+                    };
+                }
+                else return NotFound("Email ou senha inválidos");
             }
             catch
             {

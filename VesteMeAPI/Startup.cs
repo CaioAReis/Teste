@@ -13,6 +13,9 @@ using VesteMeAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using VesteMeAPI.Services.IServices;
 using VesteMeAPI.Services;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace VesteMeAPI
 {
@@ -22,7 +25,6 @@ namespace VesteMeAPI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -40,7 +42,25 @@ namespace VesteMeAPI
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IProdutoService, ProdutoService>();
 
+            services.AddCors();
             services.AddControllers();
+
+            //  Adicionando suporte à autenticação e autorização
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters() {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +73,9 @@ namespace VesteMeAPI
 
             app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
