@@ -99,7 +99,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "1")]
+        // [Authorize(Roles = "1")]
         public async Task<ActionResult> CriarProduto([FromBody] Produto produto)
         {
             try

@@ -152,14 +152,14 @@
 
 .home-container .lista-produtos ul a {
     display: block;
-    background-color: #D6EBDF;
+    background-color: #FFF;
     color: #323935;
     text-decoration: none;
     text-align: center;
     padding: 15px;
     border-radius: 10px;
 
-    border: 5px solid #D6EBDF;
+    border: 5px solid #757575;
 }
 
 .home-container .lista-produtos ul a:hover {

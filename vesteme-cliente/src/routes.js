@@ -16,7 +16,7 @@ export default function Routes() {
                 <Route path="/" exact component={HomePage}/>
                 <Route path="/login" exact component={Login}/>
                 <Route path="/cadastro"  component={Cadastro}/>
-                <Route path="/produto"  component={Produto}/>
+                <Route path="/produto/:idproduto"  component={Produto}/>
                 <Route path="/carrinho"  component={Carrinho}/>
                 <Route path="/perfil"  component={Perfil}/>
                 <Route path="/compra"  component={FinalizarCompra}/>

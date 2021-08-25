@@ -7,6 +7,8 @@ import './styles.css';
 
 import api from '../../services/api';
 
+import Sour from '../../assets/1.jpg';
+
 import Slide1 from '../../assets/1.png'
 import Slide2 from '../../assets/2.png'
 import Slide3 from '../../assets/3.png'
@@ -18,32 +20,38 @@ import Logo from '../../assets/logo.svg';
 
 export default function HomePage() {
 
-    const [produtos, setProdutos] = useState([]);
-    const [categorias, setCategorias] = useState([]);
+    if (localStorage.getItem('CarrinhoID') === null) localStorage.setItem('CarrinhoID', []);
+    if (localStorage.getItem('CarrinhoTMN') === null) localStorage.setItem('CarrinhoTMN', []);
+    if (localStorage.getItem('CarrinhoQTD') === null) localStorage.setItem('CarrinhoQTD', []);
 
     const userID = localStorage.getItem('userID');
     const userName = localStorage.getItem('userName');
 
-    useEffect(() => {
-        api.get('api/produto').then(response => {
-            setProdutos(response.data);
-        });
-        api.get('api/categoria').then(response => {
-            setCategorias(response.data);
-        })
-    }, [userID]);
+    const [produtos, setProdutos] = useState([]);
+    const [produtosFiltrados, setProdutosFiltrados] = useState([]);
+    const [categorias, setCategorias] = useState([]);
+    const [search, setSearch] = useState('');
+    const [selected, setSelected] = useState(0);
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        let pesquisa = produtosFiltrados.filter(p => p.nome.toLowerCase().includes(search.toLowerCase()));
+        setProdutosFiltrados(pesquisa);
+    }
 
     const UserLogged = () => { 
         return <div>
             <Link to="/perfil" title="Acessar perfil">{userName}</Link>
             <Link to="/login" title="Sair"><AiOutlinePoweroff size={40}/></Link>
-        </div>}
+        </div>
+    }
 
     const UserUnLogged = () => { 
         return <div> 
             <Link to="/cadastro">Crie sua conta</Link> 
             <Link to="/login">Entrar</Link>
-        </div>}
+        </div>
+    }
 
     const Greeting = (props) => {
         const isLogged = props.isLogged;
@@ -51,15 +59,40 @@ export default function HomePage() {
         return <UserUnLogged />
     }
 
-    const [selected] = useState("selected");
+    const handleSelected = (categoria) => { 
+        setSelected(categoria);
+        if (categoria === 0)
+            return setProdutosFiltrados(produtos);
+        const filtered = produtos.filter(p => p.categoriaID === categoria);
+        setProdutosFiltrados(filtered);
+    }
+
+    useEffect(() => {
+        const fetch = async () => {
+            await api.get('api/produto').then(response => {
+                setProdutos(response.data);
+                setProdutosFiltrados(response.data);
+            });
+            await api.get('api/categoria').then(response => {
+                response.data.unshift({id: 0, nome: "Todos"});
+                setCategorias(response.data);
+            });
+        }
+        fetch();
+    }, [userID]);
 
     return(
         <section className="home-container">
             <header className="home-header">
                 <img src={Logo} alt="Logo-vesteme" width="20%" />
                 <div className="search-form">
-                    <form>
-                        <input type="search" placeholder="Buscar produtos" />
+                    <form onSubmit={handleSearch}>
+                        <input 
+                            type="search" 
+                            placeholder="Buscar produtos" 
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
                         <button type="submit"> <FiSearch size={28} color="#323935" /> </button>
                     </form>
                 </div>
@@ -69,31 +102,26 @@ export default function HomePage() {
                 </div>
             </header>
 
-            <section className="carrossel">
+            {/* <section className="carrossel">
                 <Carousel autoPlay={true} infiniteLoop={true} showArrows={true} showThumbs={false} showStatus={false}>
-                    <div>
-                        <img src={Slide1} alt="Slide de boas vindas" />
-                    </div>
+                    <div> <img src={Slide1} alt="Slide de boas vindas" /> </div>
 
-                    <div>
-                        <img src={Slide2} alt="Slide sobre os melhores produtos"/>
-                    </div>
+                    <div> <img src={Slide2} alt="Slide sobre os melhores produtos"/> </div>
 
-                    <div>
-                        <img src={Slide3} alt="Slide sobre a variedade"/>
-                    </div>
+                    <div> <img src={Slide3} alt="Slide sobre a variedade"/> </div>
                 </Carousel>
-            </section>
+            </section> */}
 
             <section className="categorias">
                 <h1>Categorias:</h1>
                 <ul>
-                    <li>
-                        <button className={selected}>Todos</button>
-                    </li>
                     {categorias.map(categoria => (
                         <li key={categoria.id}>
-                            <button>{categoria.nome}</button>
+                            <button 
+                                className={categoria.id === selected ? "selected" : ""}
+                                onClick={() => handleSelected(categoria.id)}>
+                                {categoria.nome}
+                            </button>
                         </li>
                     ))}
                 </ul>
@@ -101,17 +129,20 @@ export default function HomePage() {
 
             <section className="lista-produtos">
                 <ul>
-                    <li>
-                        {produtos.map(produto => (
-                            <Link to={`/produto/${produto.id}`} key={produto.id}>
-                                <img src={produto.imagem} alt="Imagem do produto" />
+                    {produtosFiltrados.map(produto => (
+                        <li key={produto.id}>
+                            <Link to={`/produto/${produto.id}`}>
+                                <img src={Sour} alt="Imagem do produto" />
                                 <div className="produto-info">
-                                    <h2>{produto.valor}</h2>
+                                    <h2>
+                                        {Intl.NumberFormat('pt-br', 
+                                        {style: 'currency', currency: 'BRL'}).format(produto.valor)}
+                                    </h2>
                                     <p>{produto.nome}</p>
                                 </div>
                             </Link>
-                        ))}
-                    </li>
+                        </li>
+                    ))}
                 </ul>
             </section>
         </section>
