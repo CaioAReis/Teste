@@ -22,6 +22,8 @@ namespace VesteMeAPI.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal Valor { get; set; }
 
+        public int? QuantidadePedido { get; set; } = 0;
+
         public int QuantidadeEstoque { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -35,11 +37,9 @@ namespace VesteMeAPI.Models
         public int CategoriaID { get; set; }
         public  Categoria Categoria { get; set; }
 
-        public int TamanhoID { get; set; }
+        public int? TamanhoID { get; set; } = 0;
         [NotMapped]
         public Tamanho Tamanho { get; set; }
         public virtual ICollection<Tamanho> Tamanhos { get; set; }
-
-        public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }

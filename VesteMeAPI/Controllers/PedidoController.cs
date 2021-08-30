@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +20,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         public async Task<ActionResult<IAsyncEnumerable<Pedido>>> ListarPedidos()
         {
             try
@@ -82,7 +82,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> CriarPedido([FromBody] Pedido pedido) 
         {
             try

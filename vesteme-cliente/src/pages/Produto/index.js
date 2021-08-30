@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -9,6 +9,11 @@ import Sour from '../../assets/1.jpg'
 import ColumnBack from '../../components/ColumnBack';
 
 export default function Produto() {
+
+    const history = useHistory();
+
+    if (sessionStorage.getItem('Compra') !== null)
+        sessionStorage.removeItem("Compra");
 
     const { idproduto } = useParams();
 
@@ -26,26 +31,51 @@ export default function Produto() {
         setTmnSelecionado(tamanho);
     }
 
-    const handleAdicionar = () => {
-        let carID, carTMN, carQTD;
-        const carrinhoID = localStorage.getItem('CarrinhoID');
-        const carrinhoTMN = localStorage.getItem('CarrinhoTMN');
-        const carrinhoQTD = localStorage.getItem('CarrinhoQTD');
-        if (carrinhoID === '') {
-            localStorage.setItem('CarrinhoID', produto.id);
-            localStorage.setItem('CarrinhoTMN', tmnSelecionado);
-            localStorage.setItem('CarrinhoQTD', qtd);
+    const handleComprarAgora = async () => {
+        const userID = localStorage.getItem('userID');
+        if (userID !== null) {
+            const endereco = await api.get(`api/endereco/usuario/${userID}`);
+
+            if (endereco !== null) {
+                const cep = endereco.data.cep;
+                let valorCep = 0;
+                if (cep !== '49400-000') valorCep = 15;
+
+                produto.quantidadePedido = qtd;
+                produto.tamanhoID = tmnSelecionado;
+                produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
+
+                const compra = [];
+                compra.push(produto);
+                compra.push(valorCep);
+                compra.push((produto.valor * qtd) + 15);
+
+                sessionStorage.setItem("Compra", JSON.stringify(compra));
+
+                history.push('../compra');
+            } else {
+                alert("Defina um endereço no perfil.");
+                history.push('../perfil');
+            }
         } else {
-            carID = carrinhoID.split(',').map(i => parseInt(i));
-            carID.push(produto.id);
-            carTMN = carrinhoTMN.split(',').map(i => parseInt(i));
-            carTMN.push(tmnSelecionado);
-            carQTD = carrinhoQTD.split(',').map(i => parseInt(i));
-            carQTD.push(qtd);
-            localStorage.setItem('CarrinhoID', carID);
-            localStorage.setItem('CarrinhoTMN', carTMN);
-            localStorage.setItem('CarrinhoQTD', carQTD);
+            alert("Faça o seu login ou cadastre-se");
+            history.push('../login');
         }
+
+    }
+
+    const handleAdicionar = () => {
+        produto.quantidadePedido = qtd;
+        produto.tamanhoID = tmnSelecionado;
+        produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
+        const data = produto;
+
+        const sss = JSON.parse(sessionStorage.getItem("Carrinho"));
+
+        sss.push(data);
+        sessionStorage.setItem("Carrinho", JSON.stringify(sss));
+
+        history.push('../carrinho');
     }
 
     useEffect(() => {
@@ -100,15 +130,17 @@ export default function Produto() {
                         </p>
 
                         <div className="produto-buttons">
-                            <Link onClick={handleAdicionar} to={localStorage.getItem('userID') == null ? '../login' : '../compra'}
+                            <button 
+                                onClick={handleComprarAgora} 
                                 className="button">
                                     Comprar agora
-                            </Link>
-                            <Link onClick={handleAdicionar} to='../carrinho'
-                                className="button" 
+                            </button>
+                            <button 
+                                onClick={handleAdicionar} 
+                                className="button"
                                 style={{backgroundColor: '#156950', color: '#D6EBDF'}}>
                                     Adicionar ao carrinho
-                            </Link>
+                            </button>
                         </div> 
                     </div>
                 </div>

@@ -30,9 +30,9 @@ namespace VesteMeAPI.Services
             return pedido;
         }
 
-        public IEnumerable<Produto> ListarProdutosDoPedido(Pedido pedido)
+        public string ListarProdutosDoPedido(Pedido pedido)
         {
-            return pedido.Produtos.ToList();
+            return pedido.Produtos;
         }
 
         public async Task<IEnumerable<Pedido>> ListarPedidosDoUsuario(int idUsuario)

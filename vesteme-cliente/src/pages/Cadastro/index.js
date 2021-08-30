@@ -62,9 +62,10 @@ export default function Cadastro() {
                 </div>
             </section>
             <section className="form-cadastro">
-                <form onSubmit={handleCadastro}>
+                <form onSubmit={handleCadastro} autoComplete="off">
                     <h1>Cadastre sua conta</h1>
                     <input 
+                        autoComplete="off"
                         placeholder="Nome completo" 
                         required size="255"
                         value={nome}

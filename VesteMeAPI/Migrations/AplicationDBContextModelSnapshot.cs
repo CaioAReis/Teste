@@ -17,21 +17,6 @@ namespace VesteMeAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
-            modelBuilder.Entity("PedidoProduto", b =>
-                {
-                    b.Property<int>("PedidosID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutosID")
-                        .HasColumnType("int");
-
-                    b.HasKey("PedidosID", "ProdutosID");
-
-                    b.HasIndex("ProdutosID");
-
-                    b.ToTable("PedidoProduto");
-                });
-
             modelBuilder.Entity("ProdutoTamanho", b =>
                 {
                     b.Property<int>("ProdutosID")
@@ -191,8 +176,11 @@ namespace VesteMeAPI.Migrations
                     b.Property<int>("PagamentoID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("Produtos")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
@@ -240,7 +228,10 @@ namespace VesteMeAPI.Migrations
                     b.Property<int>("QuantidadeEstoque")
                         .HasColumnType("int");
 
-                    b.Property<int>("TamanhoID")
+                    b.Property<int?>("QuantidadePedido")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TamanhoID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
@@ -380,27 +371,12 @@ namespace VesteMeAPI.Migrations
                         {
                             ID = 1,
                             CPF = "000.000.000-00",
-                            DataNascimento = new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            DataNascimento = new DateTime(2021, 8, 28, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "Admin@admin.com.br",
                             Nome = "Administrador",
                             Senha = "Admin@admin.com.br",
                             TipoUsuarioID = 1
                         });
-                });
-
-            modelBuilder.Entity("PedidoProduto", b =>
-                {
-                    b.HasOne("VesteMeAPI.Models.Pedido", null)
-                        .WithMany()
-                        .HasForeignKey("PedidosID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VesteMeAPI.Models.Produto", null)
-                        .WithMany()
-                        .HasForeignKey("ProdutosID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProdutoTamanho", b =>

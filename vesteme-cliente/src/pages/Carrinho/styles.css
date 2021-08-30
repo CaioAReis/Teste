@@ -110,6 +110,16 @@
     width: 70%;
 }
 
+.cart-container .cart-main .endereco-cart div > div p{
+    margin-block: 15px;
+    margin-left: 20px;
+}
+
+.cart-container .cart-main .endereco-cart div > div p span{
+    color: #09CE93;
+    font-weight: 700;
+}
+
 .cart-container .cart-main .endereco-cart h1 {
     margin-bottom: 20px;
     font-size: 20px;

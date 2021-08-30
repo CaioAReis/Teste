@@ -108,12 +108,13 @@ namespace VesteMeAPI.Migrations
                     Descricao = table.Column<string>(type: "longtext", maxLength: 20000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Valor = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    QuantidadePedido = table.Column<int>(type: "int", nullable: true),
                     QuantidadeEstoque = table.Column<int>(type: "int", nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     CategoriaID = table.Column<int>(type: "int", nullable: false),
-                    TamanhoID = table.Column<int>(type: "int", nullable: false)
+                    TamanhoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,9 +201,11 @@ namespace VesteMeAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UsuarioID = table.Column<int>(type: "int", nullable: false),
                     PagamentoID = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                    Status = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ValorTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    Produtos = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     DataEntrega = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -219,31 +222,6 @@ namespace VesteMeAPI.Migrations
                         name: "FK_Pedidos_Usuarios_UsuarioID",
                         column: x => x.UsuarioID,
                         principalTable: "Usuarios",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "PedidoProduto",
-                columns: table => new
-                {
-                    PedidosID = table.Column<int>(type: "int", nullable: false),
-                    ProdutosID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PedidoProduto", x => new { x.PedidosID, x.ProdutosID });
-                    table.ForeignKey(
-                        name: "FK_PedidoProduto_Pedidos_PedidosID",
-                        column: x => x.PedidosID,
-                        principalTable: "Pedidos",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PedidoProduto_Produtos_ProdutosID",
-                        column: x => x.ProdutosID,
-                        principalTable: "Produtos",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -297,12 +275,7 @@ namespace VesteMeAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "ID", "CPF", "Celular", "DataNascimento", "Email", "EnderecoID", "Nome", "Senha", "Telefone", "TipoUsuarioID" },
-                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 8, 24, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PedidoProduto_ProdutosID",
-                table: "PedidoProduto",
-                column: "ProdutosID");
+                values: new object[] { 1, "000.000.000-00", null, new DateTime(2021, 8, 28, 0, 0, 0, 0, DateTimeKind.Local), "Admin@admin.com.br", null, "Administrador", "Admin@admin.com.br", null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_PagamentoID",
@@ -338,19 +311,10 @@ namespace VesteMeAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PedidoProduto");
-
-            migrationBuilder.DropTable(
-                name: "ProdutoTamanho");
-
-            migrationBuilder.DropTable(
                 name: "Pedidos");
 
             migrationBuilder.DropTable(
-                name: "Produtos");
-
-            migrationBuilder.DropTable(
-                name: "Tamanhos");
+                name: "ProdutoTamanho");
 
             migrationBuilder.DropTable(
                 name: "Pagamentos");
@@ -359,13 +323,19 @@ namespace VesteMeAPI.Migrations
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
-                name: "Categorias");
+                name: "Produtos");
+
+            migrationBuilder.DropTable(
+                name: "Tamanhos");
 
             migrationBuilder.DropTable(
                 name: "Enderecos");
 
             migrationBuilder.DropTable(
                 name: "TipoUsuarios");
+
+            migrationBuilder.DropTable(
+                name: "Categorias");
         }
     }
 }

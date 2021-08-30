@@ -21,7 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "1")]
+        // [Authorize(Roles = "1")]
         public async Task<ActionResult<IAsyncEnumerable<Usuario>>> ListarUsuarios()
         {
             try
@@ -36,7 +36,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1,2")]
         public async Task<ActionResult<Usuario>> BuscarUsuario(int id)
         {
             try

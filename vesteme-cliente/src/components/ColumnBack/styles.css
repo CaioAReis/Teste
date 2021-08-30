@@ -9,12 +9,15 @@
     justify-content: center;
 }
 
-.back-container a {
+.back-container button {
     margin-top: 50px;
     transition: opacity 0.2s;
+    color: #323935;
     height: 50px;
+    background-color: transparent;
+    border: 0;
 }
 
-.back-container a:hover {
-    opacity: 60%;
+.back-container button:hover {
+    color: rgba(255, 255, 255, 0.795);
 }

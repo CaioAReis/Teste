@@ -20,9 +20,11 @@ import Logo from '../../assets/logo.svg';
 
 export default function HomePage() {
 
-    if (localStorage.getItem('CarrinhoID') === null) localStorage.setItem('CarrinhoID', []);
-    if (localStorage.getItem('CarrinhoTMN') === null) localStorage.setItem('CarrinhoTMN', []);
-    if (localStorage.getItem('CarrinhoQTD') === null) localStorage.setItem('CarrinhoQTD', []);
+    if (sessionStorage.getItem('Carrinho') === null) 
+        sessionStorage.setItem('Carrinho', JSON.stringify([]));
+    
+    if (sessionStorage.getItem('Compra') !== null)
+        sessionStorage.removeItem("Compra");
 
     const userID = localStorage.getItem('userID');
     const userName = localStorage.getItem('userName');
@@ -33,6 +35,11 @@ export default function HomePage() {
     const [search, setSearch] = useState('');
     const [selected, setSelected] = useState(0);
 
+    const logout = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+    }
+
     const handleSearch = async (e) => {
         e.preventDefault();
         let pesquisa = produtosFiltrados.filter(p => p.nome.toLowerCase().includes(search.toLowerCase()));
@@ -42,7 +49,7 @@ export default function HomePage() {
     const UserLogged = () => { 
         return <div>
             <Link to="/perfil" title="Acessar perfil">{userName}</Link>
-            <Link to="/login" title="Sair"><AiOutlinePoweroff size={40}/></Link>
+            <Link onClick={logout} to="/login" title="Sair"><AiOutlinePoweroff size={40}/></Link>
         </div>
     }
 

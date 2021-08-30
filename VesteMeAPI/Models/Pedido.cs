@@ -18,11 +18,15 @@ namespace VesteMeAPI.Models
         public Pagamento Pagamento { get; set; }
 
         [MaxLength(255)]
-        [Required(ErrorMessage = "O status do pedido é obrigatório", AllowEmptyStrings = false)]
-        public string Status { get; set; }
+        //[Required(ErrorMessage = "O status do pedido é obrigatório", AllowEmptyStrings = false)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string Status { get; set; } = "Pedido em processo!";
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal ValorTotal { get; set; }
+
+        [Required(ErrorMessage = "A string com o array dos produtos é obrigatória", AllowEmptyStrings = false)]
+        public string Produtos { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime DataEntrega { get; set; }
@@ -30,7 +34,5 @@ namespace VesteMeAPI.Models
         [DataType(DataType.Date)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateTime? DataPedido { get; set; } = DateTime.Now;
-
-        public virtual ICollection<Produto> Produtos { get; set; }
     }
 }

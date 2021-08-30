@@ -12,14 +12,16 @@ namespace VesteMeAPI.Controllers
     public class EnderecoController : ControllerBase
     {
         private IEnderecoService _enderecoService;
+        private IUsuarioService _usuarioService;
 
-        public EnderecoController(IEnderecoService enderecoService)
+        public EnderecoController(IEnderecoService enderecoService, IUsuarioService usuarioService)
         {
             _enderecoService = enderecoService;
+            _usuarioService = usuarioService;
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        // [Authorize]
         public async Task<ActionResult<Endereco>> BuscarEndereco(int id) 
         {
             try
@@ -31,6 +33,47 @@ namespace VesteMeAPI.Controllers
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao buscar o endereço.");
+            }
+        }
+
+        [HttpGet("usuario/{idUsuario}")]
+        // [Authorize]
+        public async Task<ActionResult<Endereco>> BuscarEnderecoDoUsuario(int idUsuario) 
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(idUsuario);
+                if (usuario != null) {
+                    if (usuario.EnderecoID != null) {
+                        var endereco = await _enderecoService.BuscarEndereco((int) usuario.EnderecoID);
+                        return Ok(endereco);
+                    } else return NotFound("O Usuário ainda não setou o endereço.");
+                } else return NotFound($"Usuário com o ID: {idUsuario} não foi encontrado.");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao buscar endereço do usuário.");
+            }
+        }
+
+        [HttpPost("usuario/{idUsuario}")]
+        // [Authorize]
+        public async Task<ActionResult> CriarEnderecoDoUsuario(int idUsuario, [FromBody] Endereco endereco) 
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(idUsuario);
+                if (usuario != null) {
+                    await _enderecoService.CriarEndereco(endereco);
+                    usuario.EnderecoID = endereco.ID;
+                    usuario.Endereco = endereco;
+                    await _usuarioService.AtualizarUsuario(usuario);
+                    return CreatedAtAction(nameof(BuscarEndereco), new {id = endereco.ID}, endereco);
+                } else return NotFound($"Usuário com o ID: {idUsuario} não foi encontrado."); 
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar endereço do usuário.");
             }
         }
 
@@ -46,6 +89,27 @@ namespace VesteMeAPI.Controllers
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar o endereço.");
+            }
+        }
+
+        [HttpPut("usuario/{idUsuario}")]
+        // [Authorize]
+        public async Task<ActionResult> AtualizarEnderecoDoUsuario(int idUsuario, [FromBody] Endereco endereco) 
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(idUsuario);
+                if (usuario != null) {
+                    if (usuario.EnderecoID != null) {
+                        endereco.ID = (int) usuario.EnderecoID;
+                        await _enderecoService.AtualizarEndereco(endereco);
+                        return NoContent();
+                    } else return NotFound($"Usuário não tem um endereço para atualizar.");
+                } else return NotFound($"Usuário com o ID: {idUsuario} não foi encontrado.");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao atualizar o endereço do usuário.");
             }
         }
 
