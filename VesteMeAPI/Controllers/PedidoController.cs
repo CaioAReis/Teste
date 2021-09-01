@@ -67,7 +67,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("usuario/{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult<IAsyncEnumerator<Pedido>>> ListarPedidosDoUsuario(int id) 
         {
             try

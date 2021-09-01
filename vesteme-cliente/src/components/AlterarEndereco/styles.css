@@ -1,0 +1,42 @@
+.modal .form-container {
+    width: 80%;
+}
+
+.modal .form-container form section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.modal .form-container form section label {
+    margin-inline: 10px;
+}
+
+.modal .form-container form section input {
+    height: 50px;
+    width: 100%;
+    color: #323935;
+    border-radius: 30px;
+    padding: 0 24px;
+    font-weight: 700;
+}
+
+.modal .form-container form section select {
+    height: 50px;
+    color: #323935;
+    border-radius: 30px;
+    padding: 0 24px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}

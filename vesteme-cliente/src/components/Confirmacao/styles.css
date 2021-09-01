@@ -1,0 +1,41 @@
+.container-modal .confirmar-container {
+    z-index: 1;
+    width: 550px;
+    height: 320px;
+    background-color: #323935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    position: relative;
+    border: 10px solid #09CE93;
+    animation: animate 0.3s;
+}
+
+.container-modal .confirmar-container div {
+    width: 80%;
+    /* margin-bottom: 30px; */
+}
+
+.container-modal .confirmar-container h1 {
+    color: #09CE93;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container-modal .confirmar-container > button {
+    position: absolute;
+    top: 7px; right: 7px;
+    padding: 8px 11px;
+    background-color: transparent;
+    color: #D6EBDF;
+    font-weight: bold;
+    border: none;
+    outline: none;
+}
+
+.container-modal .confirmar-container > button:hover {
+    color: crimson;
+}
+

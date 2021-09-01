@@ -72,3 +72,49 @@ form input {
 .button:hover {
     filter: brightness(80%);
 }
+
+#modal .container-modal {
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.705);
+}
+
+.container-modal .modal {
+    z-index: 1;
+    width: 850px;
+    height: 620px;
+    background-color: #323935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    position: relative;
+    border: 10px solid #09CE93;
+    animation: animate 0.3s;
+}
+
+.container-modal .modal h1 {
+    color: #09CE93;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.container-modal .modal > button {
+    position: absolute;
+    top: 7px; right: 7px;
+    padding: 8px 11px;
+    background-color: transparent;
+    color: #D6EBDF;
+    font-weight: bold;
+    border: none;
+    outline: none;
+}
+
+.container-modal .modal > button:hover {
+    color: crimson;
+}

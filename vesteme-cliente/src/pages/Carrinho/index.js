@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import ColumnBack from '../../components/ColumnBack';
-import { FiTrash2 } from 'react-icons/fi';
-import InputMask from 'react-input-mask';
-
-import Sour from '../../assets/1.jpg'
 
 import api from '../../services/api';
 
 import './styles.css';
+
+import ColumnBack from '../../components/ColumnBack';
+import AlterarEndereco from '../../components/AlterarEndereco';
+import { FiTrash2 } from 'react-icons/fi';
+import InputMask from 'react-input-mask';
+
+import Sour from '../../assets/1.jpg'
 
 export default function Carrinho() {
 
@@ -21,9 +23,15 @@ export default function Carrinho() {
     const [cep, setCep] = useState('');
     const [valorCep, setValorCep] = useState('--');
 
+    const [modalAlterar, setModalAlterar] = useState(false);
+
     let valorTotal = carrinho.reduce((accumulator, acctualValue) => {
          return accumulator + (acctualValue.valor * acctualValue.quantidadePedido);
     }, 0);
+
+    const handleModalAlterar = () => {
+        setModalAlterar(!modalAlterar);
+    }
 
     const handleCEP = (e) => {
         e.preventDefault();
@@ -75,6 +83,7 @@ export default function Carrinho() {
     }, [userID, carrinho]);
 
     return(
+        
         <section className="cart-container">
             <ColumnBack />
             <section className="cart-main">
@@ -134,7 +143,7 @@ export default function Carrinho() {
                                 </div>
                             )}
                         </div>
-                        <button className="button">
+                        <button className="button" onClick={handleModalAlterar}>
                             {endereco === null ? "Adicionar endereço" : "Alterar endereço"}
                         </button>
                     </div>)
@@ -155,6 +164,7 @@ export default function Carrinho() {
                             Finalizar compra
                     </button>
                 </div>
+                {modalAlterar ? <AlterarEndereco endereco={endereco} setModalAlterar={setModalAlterar} /> : null}
             </section>
         </section>
     );

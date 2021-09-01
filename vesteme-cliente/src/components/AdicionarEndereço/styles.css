@@ -1,0 +1,38 @@
+.modal .form-containerAdd {
+    width: 80%;
+}
+
+.modal .form-containerAdd form input {
+    height: 50px;
+    width: 100%;
+    color: #323935;
+    border-radius: 30px;
+    padding: 0 24px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-block: 10px;
+    margin-inline: 5px;
+}
+
+.modal .form-containerAdd form select {
+    height: 50px;
+    color: #323935;
+    border-radius: 30px;
+    padding: 0 24px;
+    font-weight: 700;
+    font-size: 16px;
+} 
+
+.modal .form-containerAdd form section {
+    display: flex;
+    align-items: center;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
