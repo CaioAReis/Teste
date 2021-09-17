@@ -24,7 +24,7 @@ namespace VesteMeAPI.Services
             return await _context.Produtos.ToListAsync();
         }
 
-         public async Task<IEnumerable<Produto>> ListarProdutosPorNome(string nomeProduto)
+        public async Task<IEnumerable<Produto>> ListarProdutosPorNome(string nomeProduto)
         {
             IEnumerable<Produto> produtos;
             if (!string.IsNullOrWhiteSpace(nomeProduto)) {

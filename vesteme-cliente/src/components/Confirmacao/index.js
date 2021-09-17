@@ -7,8 +7,11 @@ import './styles.css';
 
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-export default function ConfirmarUsuario({setModalConfirmar, setModalDados}) {
+export default function ConfirmarUsuario({
+    modalNumber,setModalAlterar,setModalCriar,setModalDados,setModalConfirmar,setModalSenha}) 
+{
 
+    const userID = localStorage.getItem('userID');
     const [senha, setSenha] = useState('');
 
     const modalRef = useRef();
@@ -20,9 +23,19 @@ export default function ConfirmarUsuario({setModalConfirmar, setModalDados}) {
 
     const handleConfirmar = async (e) => {
         e.preventDefault();
-        setModalDados(true);
+        
+        const data = { senha };
+        
+        const response = await api.post(`api/usuario/confirmar/${userID}`, data);
 
-        setModalConfirmar(false);
+        if (response.data && modalNumber !== 0) {
+            if (modalNumber === 1) setModalAlterar(true);
+            else if (modalNumber === 2) setModalCriar(true);
+            else if (modalNumber === 3) setModalDados(true);
+            else if (modalNumber === 4) setModalSenha(true);
+            setModalConfirmar(false);
+        } else alert("Senha inválida");
+        
     }
 
     return ReactDOM.createPortal(

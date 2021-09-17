@@ -109,7 +109,7 @@ export default function HomePage() {
                 </div>
             </header>
 
-            {/* <section className="carrossel">
+            <section className="carrossel">
                 <Carousel autoPlay={true} infiniteLoop={true} showArrows={true} showThumbs={false} showStatus={false}>
                     <div> <img src={Slide1} alt="Slide de boas vindas" /> </div>
 
@@ -117,7 +117,7 @@ export default function HomePage() {
 
                     <div> <img src={Slide3} alt="Slide sobre a variedade"/> </div>
                 </Carousel>
-            </section> */}
+            </section>
 
             <section className="categorias">
                 <h1>Categorias:</h1>

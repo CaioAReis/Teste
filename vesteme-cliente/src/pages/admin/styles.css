@@ -1,0 +1,77 @@
+.admin-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    
+}
+
+.admin-container section.admin-tab {
+    height: 100vh;
+    width: 25%;
+    min-width: 300px;
+    background-color: #09CE93;
+    text-align: center;
+    position: fixed;
+
+}
+
+.admin-container section.admin-tab img {
+    margin-top: 30px;
+}
+
+.admin-container section.admin-tab h1{
+    text-align: center;
+    font-size: 16pt;
+    color: #323935;
+    padding-block: 20px;
+}
+
+.admin-container section.admin-tab ul {
+    /* margin-top: 30px; */
+    color: #D6EBDF;
+    background-color: #088b64;
+
+}
+
+.admin-container section.admin-tab ul li {
+    font-size: 15pt;
+    padding-block: 15px;
+}
+
+.admin-container section.admin-tab ul li:hover {
+    background-color: #259775;
+    cursor: pointer;
+}
+
+.admin-container section.admin-tab ul li.selected {
+    color: #323935;
+    background-color: #D6EBDF;
+}
+
+.admin-container section.admin-tab div.admin-profile {
+    padding-block: 20px;
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    border-top: 2px solid #323935;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.admin-container section.admin-tab div.admin-profile a {
+    font-size: 20pt;
+    text-decoration: none;
+    color: #323935;
+}
+
+.admin-container section.admin-tab div.admin-profile a:hover {
+    color: #D6EBDF;
+}
+
+.admin-container section.admin-body {
+    width: 75%;
+    height: 100vh;
+    padding: 30px;
+}

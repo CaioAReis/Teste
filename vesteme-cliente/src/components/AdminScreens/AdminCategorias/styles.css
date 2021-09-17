@@ -1,0 +1,67 @@
+.adm-categorias {
+    margin-left: 350px;
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+.adm-categorias h1 {
+    font-size: 25pt;
+    color: #09CE93;
+}
+
+.adm-categorias button.button {
+    width: 20%;
+    position: absolute;
+    top: 10px; right: 30px;
+}
+
+.adm-categorias table {
+    margin-top: 40px;
+    width: 100%;
+    min-width: 700px;
+    text-align: center;
+    font-size: 11pt;
+    /* border: 2px solid #09CE93; */
+    table-layout: fixed; 
+    margin-bottom: 40px;
+}
+
+.adm-categorias th {
+    background-color: #09CE93;
+    color: #323935;
+}
+
+.adm-categorias td, th {
+    padding-block: 10px;
+    
+}
+
+.adm-categorias td {
+    word-break: break-all;
+    padding: 5px;
+}
+
+.adm-categorias table, tr, th, td {
+    border-collapse: collapse;
+    border: 2px solid #09CE93;
+}
+
+.adm-categorias tr {
+    border-bottom: 2px solid #09CE93;
+}
+
+.adm-categorias tr:hover {
+    background-color: #464947;
+}
+
+.adm-categorias tr td .trash-icon:hover {
+    color: #f73737;
+}
+
+.adm-categorias tr td .edit-icon:hover {
+    color: #e99f16;
+}
+
+/* .adm-categorias tr:nth-child(even) {
+    background-color: #464947;
+} */

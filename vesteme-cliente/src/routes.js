@@ -8,6 +8,7 @@ import Produto from './pages/Produto';
 import Carrinho from './pages/Carrinho';
 import Perfil from './pages/Perfil';
 import FinalizarCompra from './pages/FinalizarCompra';
+import AdminScreen from './pages/admin';
 
 export default function Routes() {
     return(
@@ -20,6 +21,7 @@ export default function Routes() {
                 <Route path="/carrinho"  component={Carrinho}/>
                 <Route path="/perfil"  component={Perfil}/>
                 <Route path="/compra"  component={FinalizarCompra}/>
+                <Route path="/admin"  component={AdminScreen}/>
             </Switch>
         </BrowserRouter>
     );

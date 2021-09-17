@@ -25,7 +25,7 @@ export default function Login() {
             localStorage.setItem('userName', response.data.usu.nome);
             // localStorage.setItem('userToken', response.data.token);
             
-            if (response.data.usu.tipoUsuarioID === 1) history.push('admin');
+            if (response.data.usu.tipoUsuarioID === 1) history.push('/admin');
             else if (response.data.usu.tipoUsuarioID === 2) history.push('/');
         } catch (error) {
             alert('Email ou senha inválidos. Tente novamente.');

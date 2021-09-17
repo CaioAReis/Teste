@@ -38,7 +38,8 @@ export default function AlterarDados({setModalDados, usuario}) {
         }
 
         try {
-            api.put(`api/usuario/${userID}`, info);
+            api.put(`api/usuario/dados/${userID}`, info);
+            localStorage.setItem("userName", nome);
             alert("Seus dados foram atualizados");
         } catch (error) {
             alert("Erro ao atualizar dados");

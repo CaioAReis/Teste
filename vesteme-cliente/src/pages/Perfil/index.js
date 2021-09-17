@@ -7,8 +7,9 @@ import './styles.css';
 
 import AlterarEndereco from '../../components/AlterarEndereco';
 import AdicionarEndereco from '../../components/AdicionarEndereço';
-import ConfirmarUsuario from '../../components/Confirmacao';
 import AlterarDados from '../../components/AlterarDados';
+import AlterarSenha from '../../components/AlterarSenha';
+import ConfirmarUsuario from '../../components/Confirmacao';
 
 // import Sour from '../../assets/1.jpg';
 
@@ -21,23 +22,14 @@ export default function Perfil() {
 
     const [modalAlterar, setModalAlterar] = useState(false);
     const [modalCriar, setModalCriar] = useState(false);
-    const [modalConfirmar, setModalConfirmar] = useState(false);
     const [modalDados, setModalDados] = useState(false);
+    const [modalSenha, setModalSenha] = useState(false);
+    const [modalConfirmar, setModalConfirmar] = useState(false);
+    const [modalNumber, setModalNumber] = useState(0);
 
-    const handleModalAlterar = () => {
-        setModalAlterar(!modalAlterar);
-    }
-
-    const handleConfirmar = () => {
+    const handleConfirmar = (e) => {
+        setModalNumber(e);
         setModalConfirmar(!modalConfirmar);
-    }
-
-    const handleModalDados = () => {
-        setModalDados(!modalDados);
-    }
-
-    const handleModalCriar = () => {
-        setModalCriar(!modalCriar);
     }
 
     useEffect(() => {
@@ -74,8 +66,8 @@ export default function Perfil() {
                             <h1>Telefone: <span>{usuario.telefone}</span></h1>}
                     </div>}
                     <div style={{width: "20%"}}>
-                        <button className="button" onClick={handleModalDados}>Alterar dados</button>
-                        <button className="button" onClick={handleConfirmar}>Alterar senha</button>
+                        <button className="button" onClick={() => handleConfirmar(3)}>Alterar dados</button>
+                        <button className="button" onClick={() => handleConfirmar(4)}>Alterar senha</button>
                     </div>
                 </div>
                 <h1>Endereço</h1>
@@ -90,7 +82,9 @@ export default function Perfil() {
                         <h1>Número: <span>{endereco.numero}</span></h1>
                     </div>}
                     <button 
-                        onClick={endereco === null ? handleModalCriar : handleModalAlterar}
+                        onClick={endereco === null ? 
+                            () => handleConfirmar(2) : 
+                            () => handleConfirmar(1)}
                         className="button" 
                         style={{width: "20%"}}>
                             {endereco === null ? "Adicionar endereço" : "Alterar endereço"}
@@ -129,7 +123,13 @@ export default function Perfil() {
                 {modalAlterar ? <AlterarEndereco endereco={endereco} setModalAlterar={setModalAlterar} /> : null}
                 {modalCriar ? <AdicionarEndereco setModalCriar={setModalCriar} /> : null}
                 {modalDados ? <AlterarDados usuario={usuario} setModalDados={setModalDados} /> : null}
-                {modalConfirmar ? <ConfirmarUsuario setModalDados={setModalDados}  setModalConfirmar={setModalConfirmar} /> : null}
+                {modalSenha ? <AlterarSenha setModalSenha={setModalSenha} /> : null}
+                {modalConfirmar ? <ConfirmarUsuario setModalConfirmar={setModalConfirmar} modalNumber={modalNumber}
+                    setModalAlterar={setModalAlterar}
+                    setModalCriar={setModalCriar}
+                    setModalDados={setModalDados}
+                    setModalSenha={setModalSenha}
+                /> : null}
             </section>
         </section>
     );

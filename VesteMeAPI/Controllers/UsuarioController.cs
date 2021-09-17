@@ -42,7 +42,11 @@ namespace VesteMeAPI.Controllers
             try
             {
                 var usuario = await _usuarioService.BuscarUsuario(id);
-                if (usuario != null) return Ok(usuario);
+                if (usuario != null) 
+                {
+                    usuario.Senha = "";
+                    return Ok(usuario);
+                }
                 else return NotFound($"Usuário com o ID: {id} não foi encontrado.");
             }
             catch
@@ -86,6 +90,70 @@ namespace VesteMeAPI.Controllers
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao criar usuário.");
+            }
+        }
+
+        [HttpPost("confirmar/{id}")]
+        // [Authorize]
+        public async Task<ActionResult<bool>> ConfirmarLogadoUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(id);
+                if (usuario != null) {
+                    if (usuario.Senha == usuarioDTO.Senha) return Ok(true);
+                    else return Ok(false);
+                } else return NotFound($"Usuário com o ID: {id} não foi encontrado.");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao atualizar dados do usuário.");
+            }
+        }
+        
+        [HttpPatch("senha/{id}")]
+        // [Authorize]
+        public async Task<ActionResult> AtualizarSenhaUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(id);
+                if (usuario != null) 
+                {
+                    usuario.Senha = usuarioDTO.Senha;
+                    await _usuarioService.AtualizarUsuario(usuario);
+                    return NoContent();
+                } else return NotFound($"Usuário com o ID: {id} não foi encontrado.");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao atualizar dados do usuário.");
+            }
+        }
+
+        [HttpPut("dados/{id}")]
+        // [Authorize]
+        public async Task<ActionResult> AtualizarDadosUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
+        {
+            try
+            {
+                var usuario = await _usuarioService.BuscarUsuario(id);
+                if (usuario != null) 
+                {
+                    usuario.Nome = usuarioDTO.Nome;
+                    usuario.CPF = usuarioDTO.CPF;
+                    usuario.Email = usuarioDTO.Email;
+                    usuario.DataNascimento = usuarioDTO.DataNascimento;
+                    usuario.Celular = usuarioDTO.Celular;
+                    usuario.Telefone = usuarioDTO.Telefone;
+
+                    await _usuarioService.AtualizarUsuario(usuario);
+                    return NoContent();
+                } else return NotFound($"Usuário com o ID: {id} não foi encontrado.");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao atualizar dados do usuário.");
             }
         }
 
