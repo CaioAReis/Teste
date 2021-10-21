@@ -16,7 +16,8 @@ export default function AdminCategorias() {
     const [modalCriar, setModalCriar] = useState(false);
 
     const handleRemove = async (id) => {
-        await api.delete(`api/categoria/${id}`);
+        // await api.delete(`api/categoria/${id}`);
+        setCategorias(categorias.filter(c => c.id !== id));
     }
 
     const handleEdit = (categoria) => {
