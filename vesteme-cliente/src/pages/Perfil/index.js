@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ColumnBack from '../../components/ColumnBack';
 
 import api from '../../services/api';
