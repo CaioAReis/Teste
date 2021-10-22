@@ -16,13 +16,15 @@ export default function Produto() {
         sessionStorage.removeItem("Compra");
 
     const { idproduto } = useParams();
+    
+    const userToken = sessionStorage.getItem('userToken');
 
     const [produto, setProduto] = useState(null);
     const [qtd, setQtd] = useState(1);
     const valorProduto = produto != null ? produto.valor : 0;
     const estoqueProduto = produto != null ? produto.quantidadeEstoque : 0;
     const [tamanhos, setTamanhos] = useState([]);
-    const [tmnSelecionado, setTmnSelecionado] = useState(1);
+    const [tmnSelecionado, setTmnSelecionado] = useState(0);
 
     function hundleIncrement() { if (qtd < estoqueProduto) setQtd(qtd + 1); }
     function hundleDecrement() { if (qtd > 1) setQtd(qtd - 1); }
@@ -32,50 +34,57 @@ export default function Produto() {
     }
 
     const handleComprarAgora = async () => {
-        const userID = localStorage.getItem('userID');
-        if (userID !== null) {
-            const endereco = await api.get(`api/endereco/usuario/${userID}`);
+        if (tmnSelecionado !== 0) {
+            const userID = localStorage.getItem('userID');
+            if (userID !== null) {
+                const endereco = 
+                await api.get(`api/endereco/usuario/${userID}`, {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
+                if (endereco !== null) {
+                    const cep = endereco.data.cep;
+                    let valorCep = 0;
+                    if (cep !== '49400-000') valorCep = 15;
 
-            if (endereco !== null) {
-                const cep = endereco.data.cep;
-                let valorCep = 0;
-                if (cep !== '49400-000') valorCep = 15;
+                    produto.quantidadePedido = qtd;
+                    produto.tamanhoID = tmnSelecionado;
+                    produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
 
-                produto.quantidadePedido = qtd;
-                produto.tamanhoID = tmnSelecionado;
-                produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
+                    const compra = [];
+                    compra.push(produto);
+                    compra.push(valorCep);
+                    compra.push((produto.valor * qtd) + 15);
 
-                const compra = [];
-                compra.push(produto);
-                compra.push(valorCep);
-                compra.push((produto.valor * qtd) + 15);
+                    sessionStorage.setItem("Compra", JSON.stringify(compra));
 
-                sessionStorage.setItem("Compra", JSON.stringify(compra));
-
-                history.push('../compra');
+                    history.push('../compra');
+                } else {
+                    alert("Defina um endereço no perfil.");
+                    history.push('../perfil');
+                }
             } else {
-                alert("Defina um endereço no perfil.");
-                history.push('../perfil');
+                alert("Faça o seu login ou cadastre-se");
+                history.push('../login');
             }
-        } else {
-            alert("Faça o seu login ou cadastre-se");
-            history.push('../login');
-        }
-
+        } else alert("Selecione um tamanho!!");
     }
 
     const handleAdicionar = () => {
-        produto.quantidadePedido = qtd;
-        produto.tamanhoID = tmnSelecionado;
-        produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
-        const data = produto;
+        if (tmnSelecionado !== 0) {
+            produto.quantidadePedido = qtd;
+            produto.tamanhoID = tmnSelecionado;
+            produto.tamanho = tamanhos.find(t => t.id === tmnSelecionado);
+            const data = produto;
 
-        const sss = JSON.parse(sessionStorage.getItem("Carrinho"));
+            const sss = JSON.parse(sessionStorage.getItem("Carrinho"));
 
-        sss.push(data);
-        sessionStorage.setItem("Carrinho", JSON.stringify(sss));
+            sss.push(data);
+            sessionStorage.setItem("Carrinho", JSON.stringify(sss));
 
-        history.push('../carrinho');
+            history.push('../carrinho');
+        } else alert('Selecione um tamanho!!');
     }
 
     useEffect(() => {
@@ -102,14 +111,25 @@ export default function Produto() {
                     <div>
                         <h1 className="valor">
                             {Intl.NumberFormat('pt-br', 
-                            {style: 'currency', currency: 'BRL'}).format(valorProduto * qtd)}
+                            {style: 'currency', currency: 'BRL'})
+                            .format(valorProduto * qtd)}
                         </h1>
                         <div className="quantidade">
                             <p>Quantidade: </p>
                             <div className="qtd-buttons">
-                                <button className="button" onClick={hundleDecrement}>-</button>
+                                <button 
+                                    className="button" 
+                                    onClick={hundleDecrement}
+                                >
+                                    -
+                                </button>
                                 <p>{qtd}</p>
-                                <button className="button" onClick={hundleIncrement}>+</button>
+                                <button 
+                                    className="button" 
+                                    onClick={hundleIncrement}
+                                >
+                                    +
+                                </button>
                             </div>
                         </div>
                         <div className="tamanho">
@@ -117,8 +137,14 @@ export default function Produto() {
                             <ul>
                                 {tamanhos.map(t => (
                                     <li key={t.id}>
-                                        <button className={t.id === tmnSelecionado ? 'selected' : ""} onClick={() => handleSelectTamanho(t.id)}> 
-                                            {t.nome} 
+                                        <button 
+                                            className={
+                                                t.id === tmnSelecionado ? 'selected' : ""
+                                            } 
+                                            onClick={
+                                                () => handleSelectTamanho(t.id)
+                                            }> 
+                                                {t.nome} 
                                         </button>
                                     </li>
                                 ))}

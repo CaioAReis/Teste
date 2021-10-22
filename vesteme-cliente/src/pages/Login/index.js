@@ -21,9 +21,9 @@ export default function Login() {
 
         try {
             const response = await api.post('/api/usuario/login', data);
-            localStorage.setItem('userID', response.data.usu.id);
-            localStorage.setItem('userName', response.data.usu.nome);
-            // localStorage.setItem('userToken', response.data.token);
+            sessionStorage.setItem('userID', response.data.usu.id);
+            sessionStorage.setItem('userName', response.data.usu.nome);
+            sessionStorage.setItem('userToken', response.data.token);
             
             if (response.data.usu.tipoUsuarioID === 1) history.push('/admin');
             else if (response.data.usu.tipoUsuarioID === 2) history.push('/');
@@ -47,7 +47,12 @@ export default function Login() {
                     <p><strong>Bem vindo(a) de volta</strong></p>
                     <div className="cad-div">
                         <p>Crei sua conta</p>
-                        <Link to="/cadastro" className="button-black">Cadastre-se</Link>
+                        <Link 
+                            to="/cadastro" 
+                            className="button-black"
+                        >
+                            Cadastre-se
+                        </Link>
                     </div>
                 </div>
             </section>

@@ -15,7 +15,7 @@ export default function AdminScreen() {
 
     const [selected, setSelected] = useState(1);
     const [infoSelected, setInfoSelected] = useState(<AdminCategorias />);
-    const userName = localStorage.getItem('userName');
+    const userName = sessionStorage.getItem('userName');
 
     const handleSelected = (item) => { 
         setSelected(item);

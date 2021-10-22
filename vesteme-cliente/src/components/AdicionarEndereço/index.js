@@ -17,7 +17,8 @@ export default function AdicionarEndereco ({setModalCriar}) {
         }
     };
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [cep, setCep] = useState('');
     const [estado, setEstado] = useState('');
     const [cidade, setCidade] = useState('');
@@ -38,7 +39,11 @@ export default function AdicionarEndereco ({setModalCriar}) {
             numero
         }
         try {
-            await api.post(`api/endereco/usuario/${userID}`, data);
+            await api.post(`api/endereco/usuario/${userID}`, data,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
             alert("Endereço criado com sucesso!");
         } catch (error) {
             alert("Erro ao atualizar endereço");

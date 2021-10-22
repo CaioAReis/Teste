@@ -17,7 +17,8 @@ export default function AlterarEndereco ({setModalAlterar, endereco}) {
         }
     };
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [cep, setCep] = useState(endereco.cep);
     const [estado, setEstado] = useState(endereco.estado);
     const [cidade, setCidade] = useState(endereco.cidade);
@@ -38,7 +39,11 @@ export default function AlterarEndereco ({setModalAlterar, endereco}) {
             numero
         }
         try {
-            await api.put(`api/endereco/usuario/${userID}`, data);
+            await api.put(`api/endereco/usuario/${userID}`, data,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
             alert("Endereço atualizado com sucesso!");
         } catch (error) {
             alert("Erro ao atualizar endereço");

@@ -8,7 +8,8 @@ import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 export default function AlterarSenha({setModalSenha}) {
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [senha, setSenha] = useState('');
     const [repetir, setRepetir] = useState('');
 
@@ -25,7 +26,11 @@ export default function AlterarSenha({setModalSenha}) {
         if (senha === repetir) {
             try {
                 const data = { senha };
-                await api.patch(`api/usuario/senha/${userID}`, data);    
+                await api.patch(`api/usuario/senha/${userID}`, data,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });    
                 alert("Senha alterada com sucesso.");
                 setModalSenha(false);
             } catch (error) {

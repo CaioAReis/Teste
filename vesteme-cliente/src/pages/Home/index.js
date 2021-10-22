@@ -26,8 +26,8 @@ export default function HomePage() {
     if (sessionStorage.getItem('Compra') !== null)
         sessionStorage.removeItem("Compra");
 
-    const userID = localStorage.getItem('userID');
-    const userName = localStorage.getItem('userName');
+    const userID = sessionStorage.getItem('userID');
+    const userName = sessionStorage.getItem('userName');
 
     const [produtos, setProdutos] = useState([]);
     const [produtosFiltrados, setProdutosFiltrados] = useState([]);
@@ -42,14 +42,18 @@ export default function HomePage() {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        let pesquisa = produtosFiltrados.filter(p => p.nome.toLowerCase().includes(search.toLowerCase()));
+        let pesquisa = produtosFiltrados.filter(p => p.nome.toLowerCase()
+            .includes(search.toLowerCase()));
         setProdutosFiltrados(pesquisa);
     }
 
     const UserLogged = () => { 
         return <div>
-            <Link to="/perfil" title="Acessar perfil">{userName}</Link>
-            <Link onClick={logout} to="/login" title="Sair"><AiOutlinePoweroff size={40}/></Link>
+            <Link to="/perfil" title="Acessar perfil"> {userName} </Link>
+
+            <Link onClick={logout} to="/login" title="Sair">
+                <AiOutlinePoweroff size={40}/>
+            </Link>
         </div>
     }
 
@@ -100,22 +104,38 @@ export default function HomePage() {
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                         />
-                        <button type="submit"> <FiSearch size={28} color="#323935" /> </button>
+                        <button type="submit"> 
+                            <FiSearch size={28} color="#323935" /> 
+                        </button>
                     </form>
                 </div>
                 <div className="info-car">
                     <Greeting isLogged={userName != null ? true : false} />
-                    <Link to="/carrinho" title="Carrinho de compras"><FiShoppingCart size={40} /></Link>
+                    <Link to="/carrinho" title="Carrinho de compras">
+                        <FiShoppingCart size={40} />
+                    </Link>
                 </div>
             </header>
 
             <section className="carrossel">
-                <Carousel autoPlay={true} infiniteLoop={true} showArrows={true} showThumbs={false} showStatus={false}>
-                    <div> <img src={Slide1} alt="Slide de boas vindas" /> </div>
+                <Carousel 
+                    autoPlay={true} 
+                    infiniteLoop={true} 
+                    showArrows={true} 
+                    showThumbs={false} 
+                    showStatus={false}
+                >
+                    <div>
+                        <img src={Slide1} alt="Slide de boas vindas" />
+                    </div>
 
-                    <div> <img src={Slide2} alt="Slide sobre os melhores produtos"/> </div>
+                    <div>
+                        <img src={Slide2} alt="Slide sobre os melhores produtos"/>
+                    </div>
 
-                    <div> <img src={Slide3} alt="Slide sobre a variedade"/> </div>
+                    <div>
+                        <img src={Slide3} alt="Slide sobre a variedade"/>
+                    </div>
                 </Carousel>
             </section>
 
@@ -125,9 +145,11 @@ export default function HomePage() {
                     {categorias.map(categoria => (
                         <li key={categoria.id}>
                             <button 
-                                className={categoria.id === selected ? "selected" : ""}
+                                className={
+                                    categoria.id === selected ? "selected" : ""
+                                }
                                 onClick={() => handleSelected(categoria.id)}>
-                                {categoria.nome}
+                                    {categoria.nome}
                             </button>
                         </li>
                     ))}
@@ -143,7 +165,8 @@ export default function HomePage() {
                                 <div className="produto-info">
                                     <h2>
                                         {Intl.NumberFormat('pt-br', 
-                                        {style: 'currency', currency: 'BRL'}).format(produto.valor)}
+                                        {style: 'currency', currency: 'BRL'})
+                                        .format(produto.valor)}
                                     </h2>
                                     <p>{produto.nome}</p>
                                 </div>

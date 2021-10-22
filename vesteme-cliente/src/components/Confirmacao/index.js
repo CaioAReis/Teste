@@ -11,7 +11,8 @@ export default function ConfirmarUsuario({
     modalNumber,setModalAlterar,setModalCriar,setModalDados,setModalConfirmar,setModalSenha}) 
 {
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [senha, setSenha] = useState('');
 
     const modalRef = useRef();
@@ -26,7 +27,11 @@ export default function ConfirmarUsuario({
         
         const data = { senha };
         
-        const response = await api.post(`api/usuario/confirmar/${userID}`, data);
+        const response = await api.post(`api/usuario/confirmar/${userID}`, data,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
 
         if (response.data && modalNumber !== 0) {
             if (modalNumber === 1) setModalAlterar(true);

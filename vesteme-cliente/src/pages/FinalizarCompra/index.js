@@ -14,8 +14,9 @@ export default function FinalizarCompra() {
 
     const history = useHistory();
 
-    const usuarioID = localStorage.getItem('userID');
-    const [compra, setCompra] = useState(JSON.parse(sessionStorage.getItem("Compra")));
+    const usuarioID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
+    const compra = JSON.parse(sessionStorage.getItem("Compra"));
     const [pagamentoID, setPagamento] = useState(0);
     const [valorTotal, setValorTotal] = useState(0);
     const [valorCep, setValorCep] = useState(0);
@@ -32,16 +33,20 @@ export default function FinalizarCompra() {
             usuarioID,
             pagamentoID,
             valorTotal,
-            'produtos': JSON.stringify(produtos)
+            produtos: JSON.stringify(produtos)
         };
 
         console.log(JSON.stringify(produtos));
 
          try {
-             await api.post('api/pedido', data);
-             alert("Compra realizada com sucesso.");
-             sessionStorage.clear();
-             history.push('/');
+            await api.post('api/pedido', data,  {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            alert("Compra realizada com sucesso.");
+            sessionStorage.clear();
+            history.push('/');
          } catch (error) {
              alert("Erro ao fazer compra.");
          }
@@ -49,12 +54,14 @@ export default function FinalizarCompra() {
         // "produtos": "[{\"id\":2,\"nome\":\"Camisa 2\",\"descricao\":\"A melhor camisa 2 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:38.470623\",\"dataAlteracao\":\"2021-08-26T18:55:38.503625\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":1,\"tamanho\":{\"id\":1,\"nome\":\"PP\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null},{\"id\":3,\"nome\":\"Camisa 3\",\"descricao\":\"A melhor camisa 3 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:50.108289\",\"dataAlteracao\":\"2021-08-26T18:55:50.12129\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":5,\"tamanho\":{\"id\":5,\"nome\":\"GG\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null}]"
     }
     
-    if (compra !== null) {
-        if (valorTotal === 0 && valorCep === 0) {
-            setValorTotal(compra.pop());
-            setValorCep(compra.pop());
+    useEffect(()=>{
+        if (compra !== null) {
+            if (valorTotal === 0 && valorCep === 0) {
+                setValorTotal(compra.pop());
+                setValorCep(compra.pop());
+            }
         }
-    }
+    }, [compra, valorCep, valorTotal])
 
     return(
         <section className="compra-container">

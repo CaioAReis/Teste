@@ -15,7 +15,8 @@ import ConfirmarUsuario from '../../components/Confirmacao';
 
 export default function Perfil() {
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [usuario, setUsuario] = useState(null);
     const [endereco, setEndereco] = useState(null);
     const [pedidos, setPedidos] = useState([]);
@@ -34,17 +35,27 @@ export default function Perfil() {
 
     useEffect(() => {
         const fetch = async () => {
-            await api.get(`api/usuario/${userID}`)
-            .then(response => setUsuario(response.data));
+            await api.get(`api/usuario/${userID}`,  {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            }).then(response => setUsuario(response.data));
 
-            await api.get(`api/endereco/usuario/${userID}`)
-            .then(response => setEndereco(response.data));
+            await api.get(`api/endereco/usuario/${userID}`,  {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            }).then(response => setEndereco(response.data));
 
-            await api.get(`api/pedido/usuario/${userID}`)
+            await api.get(`api/pedido/usuario/${userID}`,  {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            })
             .then(response => setPedidos(response.data));
         }
         fetch();
-    }, [userID, endereco]);
+    }, [userID, endereco, userToken, modalDados, modalCriar, modalAlterar]);
 
     return(
         <section className="perfil-container">

@@ -17,7 +17,8 @@ export default function Carrinho() {
     const history = useHistory();
 
     const [carrinho, setCarrinho] = useState(JSON.parse(sessionStorage.getItem("Carrinho")));
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [endereco, setEndereco] = useState(null);
 
     const [cep, setCep] = useState('');
@@ -30,7 +31,8 @@ export default function Carrinho() {
     }, 0);
 
     const handleModalAlterar = () => {
-        setModalAlterar(!modalAlterar);
+        if (endereco === null) history.push('../perfil');
+        else setModalAlterar(!modalAlterar);
     }
 
     const handleCEP = (e) => {
@@ -73,14 +75,18 @@ export default function Carrinho() {
 
     useEffect(() => {
         const fetch = async () => {
-            await api.get(`api/endereco/usuario/${userID}`)
+            await api.get(`api/endereco/usuario/${userID}`,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                })
             .then(response => {
                 setEndereco(response.data);
             });
             setCarrinho(JSON.parse(sessionStorage.getItem("Carrinho")));
         };
         fetch();
-    }, [userID, carrinho]);
+    }, [userID, carrinho, userToken]);
 
     return(
         

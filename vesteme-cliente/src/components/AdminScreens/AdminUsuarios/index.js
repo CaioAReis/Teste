@@ -3,28 +3,47 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../services/api';
 
 import { FiTrash2, FiEdit } from 'react-icons/fi';
+import { EditUsuarios } from './EditUsuarios';
+import { CreateUsuarios } from './CreateUsuarios';
 
 export default function AdminUsuarios() {
 
+    const userToken = sessionStorage.getItem('userToken');
+
     const [usuarios, setUsuarios] = useState([]);
+    const [usuario, setUsuario] = useState(null);
+    const [editUsuario, setEditUsuario] = useState(false);
+    const [createUsuario, setCreateUsuario] = useState(false);
 
-    const handleRemove = (id) => {
-
+    const handleRemove = async (id) => {
+        try {
+            await api.delete(`api/usuario/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
+            alert(`Usuário com ID: ${id} foi removido com sucesso!!`);
+        } catch {
+            alert('Erro ao remover usuário!!');
+        }
     }
 
-    // const handleEdit = (id) => {
-        
-    // }
-
     useEffect(() => {
-        api.get('api/usuario').then(response => setUsuarios(response.data));
-    }, []);
+        api.get('api/usuario', {
+            headers: {
+                Authorization: `Bearer ${userToken}`
+            }
+        }).then(response => setUsuarios(response.data));
+    }, [createUsuario, editUsuario, userToken]);
 
     return (
         <section className="adm-categorias">
 
             <h1>Administração de usuários</h1>
-            <button className="button">
+            <button 
+                className="button"
+                onClick={() => setCreateUsuario(!createUsuario)}
+            >
                 Novo usuário
             </button>
 
@@ -62,13 +81,23 @@ export default function AdminUsuarios() {
                                     size={30} title="Remover"
                                     onClick={() => handleRemove(usuario.id)}
                                 />
-                                <FiEdit className="edit-icon" size={30} title="Editar"/>
+                                <FiEdit 
+                                    className="edit-icon" 
+                                    size={30} 
+                                    title="Editar"
+                                    onClick={() => {
+                                        setEditUsuario(!editUsuario)
+                                        setUsuario(usuario)
+                                    }}
+                                />
                             </td>
                         </tr>
                         ))
                     }
                 </tbody>
             </table>
+            {editUsuario ? <EditUsuarios setEditUsuario={setEditUsuario} usuario={usuario}/> : null}
+            {createUsuario ? <CreateUsuarios setCreateUsuario={setCreateUsuario} /> : null}
         </section>
     );
 }

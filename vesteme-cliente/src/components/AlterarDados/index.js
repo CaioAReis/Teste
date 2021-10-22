@@ -10,7 +10,8 @@ import { IoIosCloseCircleOutline } from 'react-icons/io'
 
 export default function AlterarDados({setModalDados, usuario}) {
 
-    const userID = localStorage.getItem('userID');
+    const userID = sessionStorage.getItem('userID');
+    const userToken = sessionStorage.getItem('userToken');
     const [nome, setNome] = useState(usuario.nome);
     const [cpf, setCpf] = useState(usuario.cpf);
     const [email, setEmail] = useState(usuario.email);
@@ -38,7 +39,11 @@ export default function AlterarDados({setModalDados, usuario}) {
         }
 
         try {
-            api.put(`api/usuario/dados/${userID}`, info);
+            api.put(`api/usuario/dados/${userID}`, info,  {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
             localStorage.setItem("userName", nome);
             alert("Seus dados foram atualizados");
         } catch (error) {
