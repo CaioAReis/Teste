@@ -1,13 +1,11 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ColumnBack from '../../components/ColumnBack';
 import { BiBarcode } from 'react-icons/bi';
 import { AiFillCreditCard } from 'react-icons/ai';
 
 import Sour from '../../assets/1.jpg'
-
 import api from '../../services/api';
-
 import './styles.css';
 
 export default function FinalizarCompra() {
@@ -16,52 +14,48 @@ export default function FinalizarCompra() {
 
     const usuarioID = sessionStorage.getItem('userID');
     const userToken = sessionStorage.getItem('userToken');
-    const compra = JSON.parse(sessionStorage.getItem("Compra"));
+
     const [pagamentoID, setPagamento] = useState(0);
-    const [valorTotal, setValorTotal] = useState(0);
-    const [valorCep, setValorCep] = useState(0);
     const [produtos, setProdutos] = useState([]);
+
+    let compra = JSON.parse(sessionStorage.getItem("Compra"));
+    const valorTotal = compra.pop();
+    const valorCep = compra.pop();
 
     const handleFazerPedido = async (e) => {
         e.preventDefault();
 
-        for (let i = 0; i < compra.length; i++) {
-            setProdutos(produtos.push(compra[i]));
-        }
+        if (pagamentoID !== 0) {
+            for (let i = 0; i < compra.length; i++) {
+                setProdutos(produtos.push(compra[i]));
+            }
 
-        const data = {
-            usuarioID,
-            pagamentoID,
-            valorTotal,
-            produtos: JSON.stringify(produtos)
-        };
+            const data = {
+                usuarioID,
+                pagamentoID,
+                valorTotal,
+                produtos: JSON.stringify(produtos)
+            };
 
-        console.log(JSON.stringify(produtos));
+            console.log(JSON.stringify(produtos));
 
-         try {
-            await api.post('api/pedido', data,  {
-                headers: {
-                    Authorization: `Bearer ${userToken}`
-                }
-            });
-            alert("Compra realizada com sucesso.");
-            sessionStorage.clear();
-            history.push('/');
-         } catch (error) {
-             alert("Erro ao fazer compra.");
-         }
+            try {
+                await api.post('api/pedido', data,  {
+                    headers: {
+                        Authorization: `Bearer ${userToken}`
+                    }
+                });
+                alert("Compra realizada com sucesso.");
+                sessionStorage.removeItem('Carrinho');
+                sessionStorage.removeItem('Compra');
+                history.push('/');
+            } catch (error) {
+                alert("Erro ao fazer compra.");
+            }
+        } else alert('Selecione a forma de pagamento CORNO!!');
         // console.log(JSON.parse("[{\"id\":2,\"nome\":\"Camisa 2\",\"descricao\":\"A melhor camisa 2 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:38.470623\",\"dataAlteracao\":\"2021-08-26T18:55:38.503625\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":1,\"tamanho\":{\"id\":1,\"nome\":\"PP\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null},{\"id\":3,\"nome\":\"Camisa 3\",\"descricao\":\"A melhor camisa 3 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:50.108289\",\"dataAlteracao\":\"2021-08-26T18:55:50.12129\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":5,\"tamanho\":{\"id\":5,\"nome\":\"GG\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null}]"));
         // "produtos": "[{\"id\":2,\"nome\":\"Camisa 2\",\"descricao\":\"A melhor camisa 2 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:38.470623\",\"dataAlteracao\":\"2021-08-26T18:55:38.503625\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":1,\"tamanho\":{\"id\":1,\"nome\":\"PP\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null},{\"id\":3,\"nome\":\"Camisa 3\",\"descricao\":\"A melhor camisa 3 do mundo\",\"valor\":59.9,\"quantidadeEstoque\":12,\"dataCadastro\":\"2021-08-26T18:55:50.108289\",\"dataAlteracao\":\"2021-08-26T18:55:50.12129\",\"categoriaID\":1,\"categoria\":null,\"tamanhoID\":5,\"tamanho\":{\"id\":5,\"nome\":\"GG\",\"produtos\":null},\"tamanhos\":null,\"pedidos\":null}]"
-    }
-    
-    useEffect(()=>{
-        if (compra !== null) {
-            if (valorTotal === 0 && valorCep === 0) {
-                setValorTotal(compra.pop());
-                setValorCep(compra.pop());
-            }
-        }
-    }, [compra, valorCep, valorTotal])
+    }   
 
     return(
         <section className="compra-container">
@@ -70,7 +64,7 @@ export default function FinalizarCompra() {
                 <h1 style={{marginBottom: 40}}>Finalizar compra</h1>
                 <h1 style={{fontSize: "30px"}}>Detalhes</h1>
                 <ul>
-                    {compra === null ? "" : compra.map((i, index) => (
+                    {compra === undefined ? null : compra.map((i, index) => (
                         <li key={index}>
                             <img src={Sour} width={80} alt="" />
                             <p>{i.nome}</p>

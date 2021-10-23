@@ -21,7 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult<Endereco>> BuscarEndereco(int id) 
         {
             try
@@ -37,7 +37,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("usuario/{idUsuario}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult<Endereco>> BuscarEnderecoDoUsuario(int idUsuario) 
         {
             try
@@ -57,7 +57,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost("usuario/{idUsuario}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult> CriarEnderecoDoUsuario(int idUsuario, [FromBody] Endereco endereco) 
         {
             try
@@ -93,7 +93,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("usuario/{idUsuario}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult> AtualizarEnderecoDoUsuario(int idUsuario, [FromBody] Endereco endereco) 
         {
             try

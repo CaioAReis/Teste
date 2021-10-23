@@ -21,7 +21,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet]
-        // [Authorize(Roles = "1")]
+        [Authorize]
         public async Task<ActionResult<IAsyncEnumerable<Usuario>>> ListarUsuarios()
         {
             try
@@ -36,7 +36,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(Roles = "1,2")]
+        [Authorize(Roles = "1,2")]
         public async Task<ActionResult<Usuario>> BuscarUsuario(int id)
         {
             try
@@ -63,11 +63,11 @@ namespace VesteMeAPI.Controllers
             {
                 var usu = await _usuarioService.BuscarUsuarioPorEmailESenha(usuario.Email, usuario.Senha);
                 if (usu != null) {
-                    //var token = TokenService.GenerateToken(usu);
+                    var token = TokenService.GenerateToken(usu);
                     usu.Senha = "";
                     return new {
                         usu = usu,
-                        //token = token
+                        token = token
                     };
                 }
                 else return NotFound("Email ou senha inválidos");
@@ -94,7 +94,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost("confirmar/{id}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult<bool>> ConfirmarLogadoUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
         {
             try
@@ -112,7 +112,7 @@ namespace VesteMeAPI.Controllers
         }
         
         [HttpPatch("senha/{id}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult> AtualizarSenhaUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
         {
             try
@@ -132,7 +132,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPut("dados/{id}")]
-        // [Authorize]
+        [Authorize]
         public async Task<ActionResult> AtualizarDadosUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
         {
             try
@@ -146,6 +146,7 @@ namespace VesteMeAPI.Controllers
                     usuario.DataNascimento = usuarioDTO.DataNascimento;
                     usuario.Celular = usuarioDTO.Celular;
                     usuario.Telefone = usuarioDTO.Telefone;
+		    usuario.TipoUsuarioID = usuarioDTO.TipoUsuarioID;
 
                     await _usuarioService.AtualizarUsuario(usuario);
                     return NoContent();

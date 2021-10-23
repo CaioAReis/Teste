@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -99,7 +99,7 @@ namespace VesteMeAPI.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         public async Task<ActionResult> CriarProduto([FromBody] Produto produto)
         {
             try
