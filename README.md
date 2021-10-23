@@ -24,15 +24,15 @@ Portanto, o presente documento visa criar uma loja online(VesteME) muito agradá
 
 ### REQUISITOS FUNCIONAIS
 
-- [ ] O sistema deve permitir o cadastro de um cliente.
-- [ ] O sistema deve autenticar usuários.
-- [ ] O sistema deve manter informações sobre os produtos.
-- [ ] O sistema deve permitir que o cliente realize um pedido.
-- [ ] O sistema deve permitir a alteração dos dados de um cliente.
-- [ ] O sistema deve disponibilizar a efetuação de pagamento.
-- [ ] O sistema deve permitir ao cliente a consulta do frete.
+- [x] O sistema deve permitir o cadastro de um cliente.
+- [x] O sistema deve autenticar usuários.
+- [x] O sistema deve manter informações sobre os produtos.
+- [x] O sistema deve permitir que o cliente realize um pedido.
+- [x] O sistema deve permitir a alteração dos dados de um cliente.
+- [x] O sistema deve disponibilizar a efetuação de pagamento.
+- [x] O sistema deve permitir ao cliente a consulta do frete.
 - [ ] O sistema deve permitir a busca de pedidos
-- [ ] Busca de produtos.
+- [x] Busca de produtos.
 - [ ] Cancelamento de compra.
 
 ### REQUISITOS NÃO FUNCIONAIS
